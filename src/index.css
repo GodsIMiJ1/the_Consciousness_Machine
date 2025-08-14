@@ -2,16 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Optional: minimal base so it's obviously styled even if utility classes purge */
+html, body, #root { height: 100%; }
+body { background: #0b0b0d; color: #fff; }
+
 /* 🔥 SACRED TRIBUNAL STYLES 🔥 */
 @layer base {
   body {
     background: linear-gradient(135deg, #020617 0%, #0f172a 50%, #020617 100%);
     @apply text-white min-h-screen antialiased;
     font-family: 'Inter', system-ui, sans-serif;
-  }
-  
-  * {
-    @apply border-ghost-700;
   }
 }
 
