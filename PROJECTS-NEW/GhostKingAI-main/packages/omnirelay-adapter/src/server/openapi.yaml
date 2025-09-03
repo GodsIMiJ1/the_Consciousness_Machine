@@ -1,0 +1,308 @@
+openapi: 3.1.0
+info:
+  title: Omnirelay to Omari Adapter
+  version: 1.0.0
+  description: |
+    Secure bridge that lets any Empire app speak to Omari and lets Omari broadcast events back into the Empire grid.
+
+    ## Authentication
+    All requests must include HMAC-SHA256 authentication headers:
+    - `X-Request-Id`: UUID v4
+    - `X-Timestamp`: RFC3339 UTC timestamp
+    - `X-Device-Id`: Omari device ID
+    - `X-Signature`: HMAC-SHA256(base64) over method + path + body + timestamp
+
+    ## Rate Limiting
+    - 60 requests per minute per IP/device
+    - 20 requests per 10 seconds burst limit
+
+    ## Idempotency
+    Include `Idempotency-Key` header for safe retries. Results cached for 24 hours.
+servers:
+  - url: /api/relay/v1
+    description: Omnirelay Adapter API
+paths:
+  /health:
+    get:
+      operationId: health
+      summary: Health check
+      description: Returns adapter health status and configuration
+      responses:
+        '200':
+          description: Adapter is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string, enum: [ok] }
+                  mode: { type: string, enum: [local, cloud] }
+                  storage: { type: string, enum: [memory, postgresql] }
+                  version: { type: string }
+                  protocol: { type: string }
+                  timestamp: { type: string, format: date-time }
+  /version:
+    get:
+      operationId: version
+      summary: Get version information
+      responses:
+        '200':
+          description: Version information
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  version: { type: string }
+                  build: { type: string }
+                  protocol: { type: string }
+  /ingest:
+    post:
+      operationId: ingestCommand
+      summary: Process single command envelope
+      description: Ingest and process a single Omnirelay command envelope
+      security:
+        - HMACAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Envelope'
+      responses:
+        '200':
+          description: Command processed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string, enum: [ok] }
+                  result: { oneOf: [{ type: object }, { type: array }, { type: string }, { type: number }, { type: boolean }, { type: 'null' }] }
+                  request_id: { type: string }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '409': { $ref: '#/components/responses/IdempotencyConflict' }
+        '422': { $ref: '#/components/responses/ValidationFailed' }
+        '429': { $ref: '#/components/responses/RateLimited' }
+        '500': { $ref: '#/components/responses/InternalError' }
+  /batch:
+    post:
+      operationId: batchIngest
+      summary: Process multiple command envelopes
+      description: Ingest and process up to 50 command envelopes in a single request
+      security:
+        - HMACAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              maxItems: 50
+              items:
+                $ref: '#/components/schemas/Envelope'
+      responses:
+        '200':
+          description: Batch processed
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    status: { type: string, enum: [ok, error] }
+                    result: {}
+                    error: { type: string }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '429': { $ref: '#/components/responses/RateLimited' }
+        '500': { $ref: '#/components/responses/InternalError' }
+  /emit:
+    post:
+      operationId: emitEvent
+      summary: Emit event to Omnirelay webhook
+      description: Send an event envelope to the configured Omnirelay webhook URL
+      security:
+        - HMACAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Envelope'
+      responses:
+        '204':
+          description: Event emitted successfully
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '500': { $ref: '#/components/responses/InternalError' }
+        '502':
+          description: Webhook delivery failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /metrics:
+    get:
+      operationId: getMetrics
+      summary: Get adapter metrics
+      description: Returns basic performance and health metrics
+      responses:
+        '200':
+          description: Metrics data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  uptime: { type: number }
+                  memory: { type: object }
+                  timestamp: { type: string, format: date-time }
+components:
+  securitySchemes:
+    HMACAuth:
+      type: apiKey
+      in: header
+      name: X-Signature
+      description: |
+        HMAC-SHA256 signature authentication. Required headers:
+        - X-Request-Id: UUID v4
+        - X-Timestamp: RFC3339 UTC timestamp
+        - X-Device-Id: Omari device ID
+        - X-Signature: HMAC-SHA256(base64) over method + path + body + timestamp
+  schemas:
+    Envelope:
+      type: object
+      required: [v, id, ts, source, target, op, actor, payload]
+      properties:
+        v: { type: string, const: '1.0' }
+        id: { type: string, format: uuid }
+        ts: { type: string, format: date-time }
+        source: { type: string }
+        target: { type: string }
+        op: { type: string, enum: [omari.chat, memory.query, memory.add, memory.update, memory.delete, personality.get, personality.set, integration.invoke, device.get_settings, conversation.create, conversation.list, conversation.delete, message.append, message.list] }
+        actor:
+          type: object
+          required: [device_id]
+          properties:
+            device_id: { type: string }
+            persona: { type: string }
+            scopes: { type: array, items: { type: string } }
+        context:
+          type: object
+          properties:
+            personality:
+              type: object
+              properties:
+                wisdom: { type: boolean }
+                humor: { type: boolean }
+                creative: { type: boolean }
+                analytical: { type: boolean }
+                empathetic: { type: boolean }
+                formal: { type: boolean }
+            traits: { type: array, items: { type: string } }
+            memory_hint: { type: string }
+          additionalProperties: true
+        payload: { type: object, additionalProperties: true }
+        trace:
+          type: object
+          properties:
+            request_id: { type: string }
+            parent_id: { type: string }
+          additionalProperties: true
+    MemoryBlock:
+      type: object
+      required: [id, content, category, importance, active, created_at]
+      properties:
+        id: { type: string }
+        content: { type: string, maxLength: 8000 }
+        category: { type: string }
+        importance: { type: integer, minimum: 1, maximum: 10 }
+        active: { type: boolean }
+        created_at: { type: string, format: date-time }
+        updated_at: { type: string, format: date-time }
+    Error:
+      type: object
+      required: [code, message]
+      properties:
+        code: { type: string }
+        message: { type: string }
+        request_id: { type: string }
+        details: { type: array, items: { type: object } }
+  responses:
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/Error'
+              - type: object
+                properties:
+                  code: { enum: [omari.bad_request] }
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/Error'
+              - type: object
+                properties:
+                  code: { enum: [omari.unauthorized] }
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/Error'
+              - type: object
+                properties:
+                  code: { enum: [omari.forbidden] }
+    ValidationFailed:
+      description: Validation Failed
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/Error'
+              - type: object
+                properties:
+                  code: { enum: [omari.validation_failed] }
+    IdempotencyConflict:
+      description: Idempotency Conflict
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/Error'
+              - type: object
+                properties:
+                  code: { enum: [omari.idempotency_conflict] }
+                  location: { type: string }
+    RateLimited:
+      description: Rate Limited
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/Error'
+              - type: object
+                properties:
+                  code: { enum: [omari.rate_limited] }
+    InternalError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/Error'
+              - type: object
+                properties:
+                  code: { enum: [omari.internal] }

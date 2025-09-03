@@ -1,0 +1,1 @@
+export const clinicOps={name:'ClinicOps',canHandle:(i:string)=>false,handle:async()=>({})};

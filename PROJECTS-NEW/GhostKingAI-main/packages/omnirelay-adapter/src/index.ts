@@ -1,0 +1,14 @@
+export { setupOmnirelayAdapter, initializeAdapter, validateEnvironment, getAdapterConfig, checkAdapterHealth } from './server.js';
+export { createOmnirelayRouter, setupPeriodicCleanup } from './routes.js';
+export { ingestHandler, batchIngestHandler } from './handlers/ingest.js';
+export { emitHandler, createAndEmitEvent } from './handlers/emit.js';
+export { ChatHandler } from './domain/chat.js';
+export { MemoryHandler } from './domain/memory.js';
+export { PersonalityHandler } from './domain/personality.js';
+export { IntegrationHandler } from './domain/integrations.js';
+export { ConversationHandler } from './domain/conversations.js';
+export * from './schemas/envelope.js';
+export * from './schemas/memory.js';
+export * from './security/hmac.js';
+export * from './security/allowlist.js';
+export * from './security/idempotency.js';
