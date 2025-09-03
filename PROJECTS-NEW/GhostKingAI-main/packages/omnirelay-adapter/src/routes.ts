@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import rateLimit from 'express-rate-limit';
+import rateLimit, { ipKeyGenerator } from 'express-rate-limit';
 import { ingestHandler, batchIngestHandler } from './handlers/ingest.js';
 import { emitHandler } from './handlers/emit.js';
 import { createAllowlistMiddleware } from './security/allowlist.js';
@@ -20,9 +20,9 @@ const relayRateLimit = rateLimit({
     message: 'Too many requests, please try again later.'
   },
   keyGenerator: (req) => {
-    // Use device ID if available, otherwise fall back to IP
+    // Use device ID if available, otherwise fall back to IPv6-safe IP
     const deviceId = req.headers['x-device-id'];
-    return deviceId ? `device:${deviceId}` : req.ip;
+    return deviceId ? `device:${deviceId}` : ipKeyGenerator(req);
   }
 });
 
