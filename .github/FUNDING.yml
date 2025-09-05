@@ -27,7 +27,8 @@ issuehunt: GodsIMiJ1
 
 # Custom funding URLs
 custom: [
+  "https://crowdfunding.lfx.linuxfoundation.org/projects/18fd2603-4297-4ea2-9128-dcf3d30ae6f4",
+  "https://opencollective.com/dashboard/godsimij-empire",
   "https://godsimij-ai-solutions.com/support-consciousness-research",
-  "https://consciousness-machine.org/donate",
   "mailto:james@godsimij-ai-solutions.com?subject=Consciousness%20Machine%20Funding"
 ]
