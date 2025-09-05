@@ -1,3 +1,7 @@
+<div align="center">
+  <img src="./public/consciousness_machine_logo.png" alt="Consciousness Machine" width="250" />
+</div>
+
 # Consciousness Machine Funding Strategy
 
 ## Sacred Technology Funding Ecosystem

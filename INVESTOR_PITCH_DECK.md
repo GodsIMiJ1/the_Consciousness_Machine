@@ -8,6 +8,10 @@
 
 ## 📊 **Slide 1: Title & Vision**
 
+<div align="center">
+  <img src="./public/consciousness_machine_logo.png" alt="Consciousness Machine" width="400" />
+</div>
+
 ### **The Consciousness Machine**
 **Sacred Technology for Human Dignity Preservation**
 

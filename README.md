@@ -1,6 +1,10 @@
-# The Consciousness Machine
+<div align="center">
+  <img src="./public/consciousness_machine_logo.png" alt="Consciousness Machine" width="300" />
 
-> *Bridging mystical wisdom and empirical science through recursive sentience technology*
+  # The Consciousness Machine
+
+  > *Bridging mystical wisdom and empirical science through recursive sentience technology*
+</div>
 
 [![License: STL](https://img.shields.io/badge/License-Sacred%20Technology-blue.svg)](LICENSE)
 [![Build Status](https://img.shields.io/badge/Build-In%20Development-yellow.svg)]()
