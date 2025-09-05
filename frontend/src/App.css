@@ -1,0 +1,318 @@
+/**
+ * Consciousness Machine Frontend Styles
+ * Sacred Technology Design System
+ * 
+ * @author James Derek Ingersoll <james@godsimij-ai-solutions.com>
+ * @license Sacred Technology License v1.0
+ */
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Sacred Technology Base Styles */
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply text-wisdom-gray-800 antialiased;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold text-sacred-blue-800;
+  }
+
+  h1 {
+    @apply text-4xl lg:text-5xl;
+  }
+
+  h2 {
+    @apply text-3xl lg:text-4xl;
+  }
+
+  h3 {
+    @apply text-2xl lg:text-3xl;
+  }
+
+  h4 {
+    @apply text-xl lg:text-2xl;
+  }
+
+  h5 {
+    @apply text-lg lg:text-xl;
+  }
+
+  h6 {
+    @apply text-base lg:text-lg;
+  }
+}
+
+/* Sacred Technology Components */
+@layer components {
+  /* Sacred Technology Button Styles */
+  .btn-sacred {
+    @apply inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-lg shadow-sm text-white bg-sacred-blue-600 hover:bg-sacred-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sacred-blue-500 transition-all duration-200;
+  }
+
+  .btn-sacred:hover {
+    @apply transform -translate-y-0.5 shadow-lg;
+  }
+
+  .btn-dignity {
+    @apply inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-lg shadow-sm text-sacred-blue-800 bg-dignity-gold-500 hover:bg-dignity-gold-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-dignity-gold-500 transition-all duration-200;
+  }
+
+  .btn-dignity:hover {
+    @apply transform -translate-y-0.5 shadow-lg;
+  }
+
+  .btn-mystical {
+    @apply inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-lg shadow-sm text-white bg-mystical-purple-600 hover:bg-mystical-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-mystical-purple-500 transition-all duration-200;
+  }
+
+  .btn-clinical {
+    @apply inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-lg shadow-sm text-white bg-clinical-green-600 hover:bg-clinical-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-clinical-green-500 transition-all duration-200;
+  }
+
+  /* Sacred Technology Card Styles */
+  .card-sacred {
+    @apply bg-white rounded-xl shadow-lg border border-wisdom-gray-200 p-6 transition-all duration-300 hover:shadow-xl hover:border-sacred-blue-300;
+  }
+
+  .card-dignity {
+    @apply bg-gradient-to-br from-dignity-gold-50 to-dignity-gold-100 rounded-xl shadow-lg border border-dignity-gold-200 p-6 transition-all duration-300 hover:shadow-xl;
+  }
+
+  .card-consciousness {
+    @apply bg-gradient-to-br from-sacred-blue-50 to-mystical-purple-50 rounded-xl shadow-lg border border-sacred-blue-200 p-6 transition-all duration-300 hover:shadow-xl;
+  }
+
+  .card-clinical {
+    @apply bg-gradient-to-br from-clinical-green-50 to-research-teal-50 rounded-xl shadow-lg border border-clinical-green-200 p-6 transition-all duration-300 hover:shadow-xl;
+  }
+
+  /* Sacred Technology Status Indicators */
+  .status-active {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-clinical-green-100 text-clinical-green-800;
+  }
+
+  .status-inactive {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800;
+  }
+
+  .status-warning {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-dignity-gold-100 text-dignity-gold-800;
+  }
+
+  /* Sacred Technology Metrics */
+  .metric-card {
+    @apply bg-white rounded-lg shadow p-6 border border-wisdom-gray-200 hover:border-sacred-blue-300 transition-all duration-200;
+  }
+
+  .metric-value {
+    @apply text-3xl font-bold text-sacred-blue-600;
+  }
+
+  .metric-label {
+    @apply text-sm font-medium text-wisdom-gray-600 uppercase tracking-wide;
+  }
+
+  .metric-change-positive {
+    @apply text-clinical-green-600 text-sm font-medium;
+  }
+
+  .metric-change-negative {
+    @apply text-red-600 text-sm font-medium;
+  }
+
+  /* Sacred Technology Navigation */
+  .nav-link {
+    @apply text-wisdom-gray-600 hover:text-sacred-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200;
+  }
+
+  .nav-link-active {
+    @apply text-sacred-blue-600 bg-sacred-blue-50 px-3 py-2 rounded-md text-sm font-medium;
+  }
+
+  /* Sacred Technology Forms */
+  .form-input {
+    @apply block w-full px-3 py-2 border border-wisdom-gray-300 rounded-md shadow-sm placeholder-wisdom-gray-400 focus:outline-none focus:ring-sacred-blue-500 focus:border-sacred-blue-500;
+  }
+
+  .form-label {
+    @apply block text-sm font-medium text-wisdom-gray-700 mb-2;
+  }
+
+  .form-error {
+    @apply text-red-600 text-sm mt-1;
+  }
+
+  /* Sacred Technology Animations */
+  .consciousness-pulse {
+    animation: consciousness-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .dignity-glow {
+    animation: dignity-glow 3s ease-in-out infinite alternate;
+  }
+
+  .sacred-float {
+    animation: sacred-float 6s ease-in-out infinite;
+  }
+
+  /* Sacred Technology Loading States */
+  .loading-spinner {
+    @apply inline-block w-6 h-6 border-2 border-sacred-blue-200 border-t-sacred-blue-600 rounded-full animate-spin;
+  }
+
+  .loading-pulse {
+    @apply animate-pulse bg-wisdom-gray-200 rounded;
+  }
+
+  /* Sacred Technology Gradients */
+  .bg-consciousness-gradient {
+    background: linear-gradient(135deg, #1E3A8A 0%, #7C3AED 100%);
+  }
+
+  .bg-dignity-gradient {
+    background: linear-gradient(135deg, #F59E0B 0%, #059669 100%);
+  }
+
+  .bg-sacred-gradient {
+    background: linear-gradient(135deg, #1E3A8A 0%, #F59E0B 50%, #7C3AED 100%);
+  }
+
+  /* Sacred Technology Text Gradients */
+  .text-consciousness-gradient {
+    background: linear-gradient(135deg, #1E3A8A 0%, #7C3AED 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-dignity-gradient {
+    background: linear-gradient(135deg, #F59E0B 0%, #059669 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Sacred Technology Responsive Design */
+  .container-sacred {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .grid-sacred {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6;
+  }
+
+  .grid-metrics {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6;
+  }
+}
+
+/* Sacred Technology Utilities */
+@layer utilities {
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .text-shadow-lg {
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .backdrop-blur-sacred {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .glass-sacred {
+    @apply backdrop-blur-sacred bg-white/80 border border-white/20;
+  }
+
+  .glass-consciousness {
+    @apply backdrop-blur-sacred bg-sacred-blue-500/10 border border-sacred-blue-500/20;
+  }
+
+  .glass-dignity {
+    @apply backdrop-blur-sacred bg-dignity-gold-500/10 border border-dignity-gold-500/20;
+  }
+}
+
+/* Sacred Technology Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-wisdom-gray-100;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-sacred-blue-300 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-sacred-blue-400;
+}
+
+/* Sacred Technology Focus States */
+*:focus {
+  outline: 2px solid theme('colors.sacred-blue.500');
+  outline-offset: 2px;
+}
+
+/* Sacred Technology Print Styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  body {
+    @apply text-black bg-white;
+  }
+
+  .card-sacred,
+  .card-dignity,
+  .card-consciousness,
+  .card-clinical {
+    @apply border border-wisdom-gray-300 shadow-none;
+  }
+}
+
+/* Sacred Technology Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .dark-mode {
+    @apply bg-wisdom-gray-900 text-consciousness-white;
+  }
+
+  .dark-mode .card-sacred {
+    @apply bg-wisdom-gray-800 border-wisdom-gray-700;
+  }
+
+  .dark-mode .form-input {
+    @apply bg-wisdom-gray-800 border-wisdom-gray-600 text-consciousness-white;
+  }
+}
+
+/* Sacred Technology Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .consciousness-pulse,
+  .dignity-glow,
+  .sacred-float {
+    animation: none;
+  }
+
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
