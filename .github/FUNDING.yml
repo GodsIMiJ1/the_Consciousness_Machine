@@ -1,0 +1,33 @@
+# Funding Configuration for The Consciousness Machine
+# Sacred Technology requires sustainable funding to serve consciousness research and dignity preservation
+
+# GitHub Sponsors
+github: [GodsIMiJ1]
+
+# Patreon
+patreon: consciousness-machine
+
+# Open Collective
+open_collective: consciousness-machine
+
+# Ko-fi
+ko_fi: consciousnessmachine
+
+# Tidelift
+tidelift: npm/consciousness-machine
+
+# Community Bridge
+community_bridge: consciousness-machine
+
+# Liberapay
+liberapay: consciousness-machine
+
+# IssueHunt
+issuehunt: GodsIMiJ1
+
+# Custom funding URLs
+custom: [
+  "https://godsimij-ai-solutions.com/support-consciousness-research",
+  "https://consciousness-machine.org/donate",
+  "mailto:james@godsimij-ai-solutions.com?subject=Consciousness%20Machine%20Funding"
+]
