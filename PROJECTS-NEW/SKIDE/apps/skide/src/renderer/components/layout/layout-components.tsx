@@ -1,5 +1,4 @@
 import React from 'react'
-import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from 'react-resizable-panels'
 
 interface LayoutProps {
   children: React.ReactNode
@@ -18,46 +17,50 @@ const Layout: React.FC<LayoutProps> & {
   Main: React.FC<MainProps>
 } = ({ children }) => {
   return (
-    <div className="layout">
-      <ResizablePanelGroup direction="horizontal">
-        {children}
-      </ResizablePanelGroup>
+    <div className="layout" style={{ display: 'flex', height: '100vh' }}>
+      {children}
     </div>
   )
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ children }) => {
   return (
-    <>
-      <ResizablePanel defaultSize={20} minSize={15} maxSize={35}>
-        <div className="sidebar">
-          {children}
-        </div>
-      </ResizablePanel>
-      <ResizableHandle />
-    </>
+    <div className="sidebar" style={{
+      width: '250px',
+      minWidth: '200px',
+      maxWidth: '400px',
+      borderRight: '1px solid #e0e0e0',
+      backgroundColor: '#f5f5f5',
+      overflow: 'auto'
+    }}>
+      {children}
+    </div>
   )
 }
 
 const Main: React.FC<MainProps> = ({ children }) => {
   return (
-    <ResizablePanel defaultSize={80}>
-      <div className="main-content">
-        <ResizablePanelGroup direction="vertical">
-          <ResizablePanel defaultSize={70} minSize={30}>
-            <div className="editor-panel">
-              {React.Children.toArray(children)[0]}
-            </div>
-          </ResizablePanel>
-          <ResizableHandle />
-          <ResizablePanel defaultSize={30} minSize={20}>
-            <div className="terminal-panel">
-              {React.Children.toArray(children)[1]}
-            </div>
-          </ResizablePanel>
-        </ResizablePanelGroup>
+    <div className="main-content" style={{
+      flex: 1,
+      display: 'flex',
+      flexDirection: 'column',
+      overflow: 'hidden'
+    }}>
+      <div className="editor-panel" style={{
+        flex: '1 1 70%',
+        minHeight: '200px',
+        borderBottom: '1px solid #e0e0e0'
+      }}>
+        {React.Children.toArray(children)[0]}
       </div>
-    </ResizablePanel>
+      <div className="terminal-panel" style={{
+        flex: '1 1 30%',
+        minHeight: '150px',
+        backgroundColor: '#1e1e1e'
+      }}>
+        {React.Children.toArray(children)[1]}
+      </div>
+    </div>
   )
 }
 
