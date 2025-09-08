@@ -1,0 +1,638 @@
+/* SKIDE Global Styles */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Open Sans', 'Helvetica Neue', sans-serif;
+  background: #1e1e1e;
+  color: #d4d4d4;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* Layout */
+.layout {
+  height: 100vh;
+  width: 100vw;
+}
+
+.sidebar {
+  background: #252526;
+  border-right: 1px solid #3e3e42;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.main-content {
+  height: 100%;
+  background: #1e1e1e;
+}
+
+.editor-panel,
+.terminal-panel {
+  height: 100%;
+  background: #1e1e1e;
+}
+
+/* Sidebar */
+.sidebar-section {
+  border-bottom: 1px solid #3e3e42;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: #2d2d30;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-icon {
+  background: none;
+  border: none;
+  color: #d4d4d4;
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-size: 12px;
+}
+
+.btn-icon:hover {
+  background: #3e3e42;
+}
+
+/* File Explorer */
+.file-explorer-empty,
+.file-explorer-loading {
+  padding: 16px 12px;
+  text-align: center;
+  color: #8c8c8c;
+  font-size: 12px;
+}
+
+.text-muted {
+  color: #6a6a6a;
+  font-size: 11px;
+}
+
+.project-name {
+  padding: 8px 12px;
+  font-weight: 600;
+  color: #ffffff;
+  border-bottom: 1px solid #3e3e42;
+  font-size: 12px;
+}
+
+.file-tree-item-label {
+  display: flex;
+  align-items: center;
+  padding: 2px 8px;
+  cursor: pointer;
+  font-size: 12px;
+  user-select: none;
+}
+
+.file-tree-item-label:hover {
+  background: #2a2d2e;
+}
+
+.file-tree-item-label.file:hover {
+  background: #094771;
+}
+
+.file-icon {
+  margin-right: 6px;
+  font-size: 14px;
+}
+
+.file-name {
+  flex: 1;
+}
+
+/* Editor */
+.editor-empty {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1e1e1e;
+}
+
+.editor-welcome {
+  text-align: center;
+  color: #d4d4d4;
+}
+
+.editor-welcome h2 {
+  margin-bottom: 16px;
+  color: #ffffff;
+}
+
+.welcome-shortcuts {
+  margin-top: 24px;
+}
+
+.shortcut {
+  margin: 8px 0;
+  font-size: 12px;
+  color: #8c8c8c;
+}
+
+.shortcut kbd {
+  background: #3e3e42;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 10px;
+  margin-right: 8px;
+}
+
+.editor-tabs-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.tab-bar {
+  display: flex;
+  background: #2d2d30;
+  border-bottom: 1px solid #3e3e42;
+  overflow-x: auto;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  background: #2d2d30;
+  border-right: 1px solid #3e3e42;
+  cursor: pointer;
+  font-size: 12px;
+  min-width: 120px;
+  max-width: 200px;
+}
+
+.tab:hover {
+  background: #3e3e42;
+}
+
+.tab.active {
+  background: #1e1e1e;
+  color: #ffffff;
+}
+
+.tab.dirty .tab-filename {
+  font-style: italic;
+}
+
+.tab-filename {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dirty-indicator {
+  color: #007acc;
+  margin-left: 4px;
+}
+
+.tab-close {
+  background: none;
+  border: none;
+  color: #8c8c8c;
+  cursor: pointer;
+  margin-left: 8px;
+  padding: 0;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+}
+
+.tab-close:hover {
+  background: #e81123;
+  color: #ffffff;
+}
+
+.editor-content {
+  flex: 1;
+  height: calc(100% - 33px);
+}
+
+.monaco-editor-container {
+  height: 100%;
+}
+
+.editor-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #8c8c8c;
+}
+
+/* Terminal */
+.terminal-container {
+  height: 100%;
+  background: #1e1e1e;
+  border-top: 1px solid #3e3e42;
+}
+
+.terminal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 12px;
+  background: #2d2d30;
+  border-bottom: 1px solid #3e3e42;
+  height: 32px;
+}
+
+.terminal-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #d4d4d4;
+}
+
+.terminal-controls {
+  display: flex;
+  gap: 4px;
+}
+
+.terminal-clear {
+  background: none;
+  border: none;
+  color: #d4d4d4;
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-size: 12px;
+}
+
+.terminal-clear:hover {
+  background: #3e3e42;
+}
+
+.terminal-content {
+  padding: 8px;
+}
+
+/* Git Panel */
+.git-panel-empty,
+.git-panel-loading {
+  padding: 16px 12px;
+  text-align: center;
+  color: #8c8c8c;
+  font-size: 12px;
+}
+
+.git-panel-tabs {
+  display: flex;
+  background: #2d2d30;
+  border-bottom: 1px solid #3e3e42;
+}
+
+.git-panel-tabs .tab {
+  flex: 1;
+  padding: 6px 12px;
+  background: #2d2d30;
+  border: none;
+  border-right: 1px solid #3e3e42;
+  color: #d4d4d4;
+  cursor: pointer;
+  font-size: 11px;
+}
+
+.git-panel-tabs .tab:hover {
+  background: #3e3e42;
+}
+
+.git-panel-tabs .tab.active {
+  background: #252526;
+  color: #ffffff;
+}
+
+.git-refresh {
+  background: none;
+  border: none;
+  color: #d4d4d4;
+  cursor: pointer;
+  padding: 6px 8px;
+  font-size: 12px;
+}
+
+.git-refresh:hover {
+  background: #3e3e42;
+}
+
+.git-panel-content {
+  padding: 12px;
+  height: calc(100% - 32px);
+  overflow-y: auto;
+}
+
+.git-branch {
+  margin-bottom: 12px;
+  font-size: 12px;
+}
+
+.ahead {
+  color: #4ec9b0;
+}
+
+.behind {
+  color: #f48771;
+}
+
+.git-files h4 {
+  margin-bottom: 8px;
+  font-size: 11px;
+  color: #ffffff;
+}
+
+.git-file {
+  display: flex;
+  align-items: center;
+  padding: 4px 0;
+  font-size: 11px;
+}
+
+.file-status-icon {
+  margin-right: 6px;
+  font-size: 12px;
+}
+
+.file-path {
+  flex: 1;
+  margin-right: 8px;
+}
+
+.file-status {
+  color: #8c8c8c;
+  font-size: 10px;
+}
+
+.git-clean,
+.git-error,
+.git-no-commits {
+  text-align: center;
+  color: #8c8c8c;
+  font-size: 12px;
+  padding: 24px 0;
+}
+
+.git-commit {
+  padding: 8px 0;
+  border-bottom: 1px solid #3e3e42;
+}
+
+.commit-message {
+  font-size: 12px;
+  color: #d4d4d4;
+  margin-bottom: 4px;
+}
+
+.commit-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: #8c8c8c;
+  margin-bottom: 2px;
+}
+
+.commit-hash {
+  font-size: 10px;
+  color: #569cd6;
+  font-family: 'Courier New', monospace;
+}
+
+/* Kodii Palette */
+.kodii-palette-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  z-index: 1000;
+  padding-top: 10vh;
+}
+
+.kodii-palette {
+  background: #252526;
+  border: 1px solid #3e3e42;
+  border-radius: 8px;
+  width: 600px;
+  max-height: 70vh;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.palette-header {
+  padding: 12px 16px;
+  background: #2d2d30;
+  border-bottom: 1px solid #3e3e42;
+}
+
+.palette-title {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.kodii-icon {
+  margin-right: 8px;
+  font-size: 16px;
+}
+
+.project-context {
+  font-size: 11px;
+  color: #8c8c8c;
+  margin-top: 4px;
+}
+
+.palette-search {
+  padding: 12px 16px;
+  border-bottom: 1px solid #3e3e42;
+}
+
+.search-input {
+  width: 100%;
+  background: #3c3c3c;
+  border: 1px solid #464647;
+  border-radius: 4px;
+  padding: 8px 12px;
+  color: #d4d4d4;
+  font-size: 14px;
+  outline: none;
+}
+
+.search-input:focus {
+  border-color: #007acc;
+  box-shadow: 0 0 0 1px #007acc;
+}
+
+.palette-content {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.command-categories {
+  padding: 8px;
+}
+
+.command-category {
+  margin-bottom: 16px;
+}
+
+.category-header {
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+  margin-bottom: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.category-icon {
+  margin-right: 6px;
+  font-size: 12px;
+}
+
+.command-list {
+  padding: 8px;
+}
+
+.command-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-bottom: 2px;
+}
+
+.command-item:hover,
+.command-item.selected {
+  background: #094771;
+}
+
+.command-item.preview {
+  padding: 6px 8px;
+  margin-bottom: 1px;
+}
+
+.command-main {
+  flex: 1;
+}
+
+.command-title {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  color: #d4d4d4;
+  margin-bottom: 2px;
+}
+
+.command-category-icon {
+  margin-right: 6px;
+  font-size: 12px;
+}
+
+.command-description {
+  font-size: 11px;
+  color: #8c8c8c;
+}
+
+.command-shortcut {
+  font-size: 10px;
+  color: #8c8c8c;
+  background: #3e3e42;
+  padding: 2px 6px;
+  border-radius: 3px;
+  margin-left: 8px;
+}
+
+.no-results {
+  text-align: center;
+  padding: 32px 16px;
+  color: #8c8c8c;
+}
+
+.help-text {
+  font-size: 11px;
+  margin-top: 8px;
+}
+
+.palette-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+  background: #2d2d30;
+  border-top: 1px solid #3e3e42;
+  font-size: 10px;
+  color: #8c8c8c;
+}
+
+.footer-shortcuts {
+  display: flex;
+  gap: 12px;
+}
+
+.footer-shortcuts kbd {
+  background: #3e3e42;
+  padding: 1px 4px;
+  border-radius: 2px;
+  margin-right: 4px;
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1e1e1e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #424242;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #4f4f4f;
+}
+
+/* Selection */
+::selection {
+  background: #264f78;
+}
+
+/* Focus */
+button:focus-visible,
+input:focus-visible {
+  outline: 1px solid #007acc;
+  outline-offset: 1px;
+}

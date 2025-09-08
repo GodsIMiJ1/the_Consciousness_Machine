@@ -1,0 +1,231 @@
+/* Global styles for SKIDE */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #1e1e1e;
+  color: #d4d4d4;
+  overflow: hidden;
+}
+
+.app {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Sidebar styles */
+.sidebar-section {
+  border-bottom: 1px solid #333;
+  padding: 8px;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+  margin-bottom: 8px;
+}
+
+.sidebar-header h3 {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #cccccc;
+}
+
+.btn-icon {
+  background: none;
+  border: none;
+  color: #cccccc;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 3px;
+  font-size: 14px;
+}
+
+.btn-icon:hover {
+  background-color: #2a2d2e;
+}
+
+/* Editor container */
+.editor-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+/* Terminal container */
+.terminal-container {
+  height: 200px;
+  border-top: 1px solid #333;
+  background-color: #1e1e1e;
+}
+
+/* Button styles */
+button {
+  background-color: #0e639c;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+button:hover {
+  background-color: #1177bb;
+}
+
+button:disabled {
+  background-color: #333;
+  color: #666;
+  cursor: not-allowed;
+}
+
+/* Input styles */
+input {
+  background-color: #3c3c3c;
+  color: #d4d4d4;
+  border: 1px solid #555;
+  padding: 6px 8px;
+  border-radius: 3px;
+  font-size: 13px;
+}
+
+input:focus {
+  outline: none;
+  border-color: #0e639c;
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1e1e1e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #424242;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Selection styles */
+::selection {
+  background-color: #264f78;
+}
+
+/* Focus styles */
+*:focus {
+  outline: 1px solid #0e639c;
+  outline-offset: -1px;
+}
+
+/* Text styles */
+.text-muted {
+  color: #969696;
+}
+
+.text-small {
+  font-size: 11px;
+}
+
+/* Utility classes */
+.flex {
+  display: flex;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.p-2 {
+  padding: 8px;
+}
+
+.p-4 {
+  padding: 16px;
+}
+
+.mb-2 {
+  margin-bottom: 8px;
+}
+
+.mb-4 {
+  margin-bottom: 16px;
+}
+
+.border-b {
+  border-bottom: 1px solid #333;
+}
+
+.bg-dark {
+  background-color: #252526;
+}
+
+.bg-darker {
+  background-color: #1e1e1e;
+}
+
+.rounded {
+  border-radius: 3px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.select-none {
+  user-select: none;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.overflow-auto {
+  overflow: auto;
+}
+
+.min-h-0 {
+  min-height: 0;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.h-full {
+  height: 100%;
+}

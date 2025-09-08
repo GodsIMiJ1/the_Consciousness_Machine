@@ -1,0 +1,27 @@
+{
+  "name": "skide",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Sovereign Kodii IDE - Privacy-first desktop IDE with integrated Kodii intelligence",
+  "author": "Ghost King",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "scripts": {
+    "dev": "pnpm --filter skide dev",
+    "build": "pnpm --filter skide build",
+    "preview": "pnpm --filter skide preview",
+    "lint": "pnpm --filter skide lint",
+    "test": "pnpm --filter skide test",
+    "clean": "pnpm --filter skide clean",
+    "postinstall": "husky install"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.8.1",
+    "@commitlint/config-conventional": "^17.8.1",
+    "husky": "^8.0.3"
+  },
+  "packageManager": "pnpm@8.15.1"
+}
