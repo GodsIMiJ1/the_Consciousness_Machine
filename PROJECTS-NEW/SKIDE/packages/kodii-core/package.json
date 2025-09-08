@@ -1,0 +1,33 @@
+{
+  "name": "@kodii/core",
+  "version": "0.1.0",
+  "description": "Kodii Core - Local AI orchestrator for SKIDE",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest",
+    "clean": "rm -rf dist",
+    "lint": "eslint src/**/*.ts"
+  },
+  "dependencies": {
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/uuid": "^9.0.7",
+    "@types/node": "^20.10.6",
+    "typescript": "^5.3.3",
+    "vitest": "^1.0.0",
+    "eslint": "^8.56.0"
+  },
+  "keywords": [
+    "ai",
+    "kodii",
+    "skide",
+    "local-first",
+    "sovereign"
+  ],
+  "author": "Ghost King",
+  "license": "MIT"
+}
