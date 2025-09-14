@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <color name="splash_background">#0B0B0B</color> <!-- FlameOS background -->
-    <color name="primary">#0EA5E9</color> <!-- AURA-BREE primary blue -->
-    <color name="primary_dark">#0284C7</color>
-    <color name="accent">#0EA5E9</color>
-</resources>

@@ -1,1 +1,0 @@
-export function flameShield(input:any){return {ok:true}};

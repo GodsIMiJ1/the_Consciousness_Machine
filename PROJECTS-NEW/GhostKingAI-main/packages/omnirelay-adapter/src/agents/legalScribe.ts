@@ -1,1 +1,0 @@
-export const legalScribe={name:'Legal',canHandle:(i:string)=>false,handle:async()=>({})};

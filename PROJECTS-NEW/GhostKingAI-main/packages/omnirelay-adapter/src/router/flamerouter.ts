@@ -1,1 +1,0 @@
-export async function llmCall(sys:string,user:string){return {out:`${sys}:${user}`}};

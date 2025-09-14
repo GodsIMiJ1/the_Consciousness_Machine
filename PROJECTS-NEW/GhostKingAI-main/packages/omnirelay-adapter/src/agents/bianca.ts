@@ -1,1 +1,0 @@
-export const bianca={name:'Bianca',canHandle:(i:string)=>false,handle:async()=>({})};

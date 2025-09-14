@@ -1,1 +1,0 @@
-export function auditLog(e:string,d:any){};

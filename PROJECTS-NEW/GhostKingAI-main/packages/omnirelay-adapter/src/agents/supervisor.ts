@@ -1,1 +1,0 @@
-export const supervisor={async route(i:string,p:any,m:any){return {ok:true}}};
