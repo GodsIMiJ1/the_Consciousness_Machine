@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prompt Engineering Mastery - Demo</title>
+  <style>
+    /* Minimal styles to keep functionality readable without inline JS */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, sans-serif; background: #0b0b0b; color: #fff; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+    nav { position: sticky; top: 0; background: rgba(0,0,0,0.8); padding: 12px 20px; z-index: 10; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    nav .logo { font-weight: bold; font-size: 1.2rem; background: linear-gradient(45deg, #00d4ff, #7b2ff7); -webkit-background-clip: text; color: transparent; }
+    section { padding: 40px 0; }
+    h1, h2 { margin-bottom: 16px; }
+    .demo-section, .book-preview, .skills-assessment, .ai-chat, .technique-showcase, .pricing { background: rgba(255,255,255,0.04); border-radius: 12px; padding: 20px; margin: 20px 0; }
+    .prompt-demo { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .prompt-textarea, .output-box { width: 100%; min-height: 180px; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.25); background: rgba(0,0,0,0.5); color: #fff; }
+    .btn { padding: 12px 20px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; }
+    .btn-primary { background: linear-gradient(45deg, #00d4ff, #7b2ff7); color: #fff; }
+    .btn-secondary { background: transparent; border: 1px solid rgba(255,255,255,0.5); color: #fff; }
+    #assessment-questions { display: block; }
+    .question-card { background: rgba(0,0,0,0.4); padding: 16px; border-radius: 8px; margin-bottom: 12px; }
+    .answer-option { padding: 8px; border: 1px solid rgba(255,255,255,0.25); border-radius: 6px; margin: 6px 0; cursor: pointer; }
+    .answer-option.selected { background: rgba(0,212,255,0.25); border-color: #00d4ff; }
+    .output-box { min-height: 200px; white-space: pre-wrap; }
+    .floating-menu { position: fixed; bottom: 20px; right: 20px; z-index: 50; }
+    .floating-main-btn { width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(45deg, #00d4ff, #7b2ff7); color: white; border: none; font-size: 22px; cursor: pointer; }
+    .floating-options { display: none; position: absolute; bottom: 70px; right: 0; background: rgba(0,0,0,0.8); padding: 8px; border-radius: 8px; }
+    .floating-options.active { display: block; }
+    .floating-option { display: inline-flex; align-items: center; gap: 6px; padding: 8px 12px; border-radius: 20px; color: #fff; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container">
+      <span class="logo">PromptMastery</span>
+    </div>
+  </nav>
+
+  <main class="container">
+    <!-- Demo: Interactive prompt optimization (external JS will drive this) -->
+    <section class="demo-section" id="demo">
+      <h2>Experience AI Mastery</h2>
+      <p>Enter a prompt to optimize. The optimization is powered by the external script.js.</p>
+      <div class="demo-inner" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+        <div>
+          <div class="prompt-label" style="margin-bottom:8px;">🎯 Your Prompt</div>
+          <textarea id="userPrompt" class="prompt-textarea" placeholder="Enter your prompt here... e.g. 'Write a marketing email for my product'"></textarea>
+        </div>
+        <div>
+          <div class="prompt-label" style="margin-bottom:8px;">🚀 AI-Optimized Version</div>
+          <div id="optimizedPrompt" class="output-box" style="min-height:200px; background: rgba(0,0,0,0.5); color:#fff; padding:12px; border-radius:8px;"></div>
+        </div>
+      </div>
+      <div style="margin-top:12px;">
+        <button class="btn btn-primary" onclick="optimizePrompt()">Optimize My Prompt</button>
+        <button class="btn btn-secondary" onclick="loadExample()">Load Example</button>
+        <button class="btn btn-secondary" onclick="clearDemo()">Clear</button>
+      </div>
+    </section>
+
+    <!-- Book Preview (static sections) -->
+    <section class="book-preview" id="book">
+      <h2>What You'll Master</h2>
+      <p>Six comprehensive sections covering advanced prompt techniques.</p>
+      <div class="chapters-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:16px;">
+        <div class="chapter-card" style="padding:16px; background: rgba(255,255,255,0.05); border-radius:8px;">
+          <div class="chapter-number" style="color:#00d4ff; font-size:12px; text-transform:uppercase; letter-spacing:1px;">Part 1</div>
+          <div class="chapter-title" style="font-weight:700; font-size:16px;">Beyond Basic Prompts</div>
+          <p class="chapter-description" style="opacity:0.8;">Multi-step reasoning, context stacking, and prompt chaining.</p>
+        </div>
+        <div class="chapter-card" style="padding:16px; background: rgba(255,255,255,0.05); border-radius:8px;">
+          <div class="chapter-number" style="color:#00d4ff; font-size:12px; text-transform:uppercase; letter-spacing:1px;">Part 2</div>
+          <div class="chapter-title" style="font-weight:700; font-size:16px;">Advanced Architectures</div>
+          <p class="chapter-description" style="opacity:0.8;">Few-shot learning, role-based prompts, etc.</p>
+        </div>
+        <div class="chapter-card" style="padding:16px; background: rgba(255,255,255,0.05); border-radius:8px;">
+          <div class="chapter-number" style="color:#00d4ff; font-size:12px; text-transform:uppercase; letter-spacing:1px;">Part 3</div>
+          <div class="chapter-title" style="font-weight:700; font-size:16px;">Domain Mastery</div>
+          <p class="chapter-description" style="opacity:0.8;">Documentation, coding prompts, business analysis.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Assessment (static skeleton; JS will populate) -->
+    <section class="skills-assessment" id="assessment">
+      <h2 class="assessment-title">Test Your Prompt Engineering Skills</h2>
+      <p class="assessment-subtitle">A quick assessment to gauge your current level</p>
+      <div id="assessment-questions"></div>
+      <div class="demo-buttons" style="margin-top:12px;">
+        <button class="demo-btn" onclick="startAssessment()">Start Assessment</button>
+        <button class="demo-btn" onclick="resetAssessment()">Reset</button>
+      </div>
+      <div id="assessment-result" class="assessment-result" style="display:none; margin-top:12px;">
+        <div class="score-display" id="score">0%</div>
+        <div class="skill-level" id="skill-level">Loading...</div>
+        <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+        <p id="recommendation" style="margin-top:8px;"></p>
+      </div>
+    </section>
+
+    <!-- AI Chat -->
+    <section class="ai-chat" id="chat" style="margin-top: 20px;">
+      <div class="chat-header" style="text-align:center;">
+        <h3 class="chat-title">Chat with PromptGPT</h3>
+        <p class="chat-subtitle" style="opacity:.8;">Ask questions about prompt engineering</p>
+      </div>
+      <div id="chat-messages" class="chat-messages" style="height:260px; overflow:auto; background: rgba(255,255,255,0.04); padding:8px; border-radius:8px;">
+        <div class="message ai" style="display:flex; gap:8px;">
+          <div class="message-avatar" style="width:28px; height:28px; border-radius:50%; background: rgba(0,212,255,0.2); display:flex; align-items:center; justify-content:center; font-size:12px;">AI</div>
+          <div class="message-content" style="background: rgba(255,255,255,0.1); padding:8px; border-radius:8px;">
+            Hello! Ask me about prompt engineering techniques.
+          </div>
+        </div>
+      </div>
+      <div class="chat-input-container" style="display:flex; gap:8px; align-items:center; margin-top:8px;">
+        <input id="chat-input" class="chat-input" placeholder="Ask about prompt engineering..." style="flex:1; padding:10px; border-radius:8px; background: rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.2);" />
+        <button class="chat-send" onclick="sendMessage()" style="padding:10px 14px; border:none; border-radius:8px; background: linear-gradient(45deg, #00d4ff, #7b2ff7); color:white; font-weight:600;">Send</button>
+      </div>
+    </section>
+
+    <!-- Live Technique Showcase -->
+    <section class="technique-showcase" id="techniques">
+      <h2 style="text-align:center; color:#7b2ff7;">Live Technique Showcase</h2>
+      <p style="text-align:center; opacity:.8; margin-bottom:12px;">Explore techniques with interactive examples</p>
+      <div class="technique-tabs" style="display:flex; justify-content:center; gap:8px; flex-wrap:wrap; margin-bottom:12px;">
+        <button class="technique-tab active" onclick="showTechnique('chain-of-thought')">Chain-of-Thought</button>
+        <button class="technique-tab" onclick="showTechnique('few-shot')">Few-Shot Learning</button>
+        <button class="technique-tab" onclick="showTechnique('role-based')">Role-Based</button>
+        <button class="technique-tab" onclick="showTechnique('context-stacking')">Context Stacking</button>
+      </div>
+      <div class="technique-content" style="background: rgba(0,0,0,0.4); padding:16px; border-radius:8px;">
+        <div class="technique-example active" id="chain-of-thought" style="display:block;">
+          <h3 style="color:#00d4ff; margin-bottom:8px;">Chain-of-Thought Prompting</h3>
+          <p style="opacity:.9;">Step-by-step reasoning example.</p>
+        </div>
+        <div class="technique-example" id="few-shot" style="display:none;">
+          <h3 style="color:#00d4ff; margin-bottom:8px;">Few-Shot Learning</h3>
+          <p style="opacity:.9;">Provide examples to guide responses.</p>
+        </div>
+        <div class="technique-example" id="role-based" style="display:none;">
+          <h3 style="color:#00d4ff; margin-bottom:8px;">Role-Based Prompting</h3>
+          <p style="opacity:.9;">Assign a role to guide outputs.</p>
+        </div>
+        <div class="technique-example" id="context-stacking" style="display:none;">
+          <h3 style="color:#00d4ff; margin-bottom:8px;">Context Stacking</h3>
+          <p style="opacity:.9;">Layer multiple contexts to improve outputs.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="pricing" id="pricing" style="text-align:center;">
+      <h2 style="margin-bottom:12px;">Invest in Your AI Future</h2>
+      <div class="price-card" style="display:inline-block; padding:24px; border-radius:16px; background: rgba(0,0,0,0.6); border:2px solid rgba(255,255,255,0.15);">
+        <h3 style="margin-bottom:8px;">Complete Mastery Package</h3>
+        <div class="price" style="font-size:48px; font-weight:900; color:#00d4ff;">$29.99</div>
+        <p style="opacity:.8; margin-bottom:12px;">Launch Special - Save $20</p>
+        <ul style="text-align:left; list-style:none; padding-left:0;">
+          <li>Complete 300+ page ebook</li>
+          <li>19 chapters of advanced techniques</li>
+          <li>100+ practical examples</li>
+          <li>Downloadable prompt templates</li>
+          <li>Case studies from real implementations</li>
+          <li>Lifetime access to updates</li>
+          <li>30-day money-back guarantee</li>
+        </ul>
+        <button class="btn btn-primary" style="width:100%; margin-top:8px;" onclick="purchaseBook()">Get Instant Access</button>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="text-align:center; padding:40px 0;">
+      <p>&copy; 2025 Prompt Engineering Mastery. All rights reserved.</p>
+      <p style="opacity:.6;">Master the language of human-AI collaboration</p>
+    </footer>
+
+  </main>
+
+  <div class="floating-menu" id="floatingMenu">
+    <div class="floating-options" id="floating-options">
+      <a href="#demo" class="floating-option">🎯 Prompt Demo</a>
+      <a href="#assessment" class="floating-option">📊 Skill Test</a>
+      <a href="#chat" class="floating-option">💬 AI Chat</a>
+      <a href="#pricing" class="floating-option">🚀 Get Book</a>
+    </div>
+    <button class="floating-main-btn" id="floating-main" onclick="toggleFloatingMenu()">⚡</button>
+  </div>
+
+  <!-- External script (no inline JS) -->
+  <script src="script.js"></script>
+</body>
+</html>

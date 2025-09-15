@@ -1,0 +1,1 @@
+export const serena={edit:async(p:any)=>({}),search:async(p:any)=>({})};

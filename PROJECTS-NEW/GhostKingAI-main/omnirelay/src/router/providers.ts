@@ -1,0 +1,1 @@
+export function chooseProvider(){return {kind:'local',model:'llama3.1',name:'ollama'}};

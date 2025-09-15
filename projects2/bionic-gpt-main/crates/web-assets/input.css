@@ -1,0 +1,161 @@
+@import 'tailwindcss';
+@plugin "@tailwindcss/typography";
+@plugin "daisyui";
+
+@source '../web-pages/**/*.rs';
+@source 'typescript/**/*.ts';
+@source inline("modal modal-box modal-action");
+@source inline("breadcrumbs");
+@source inline("tab tabs tab-content");
+@source inline("tooltip tooltip-info");
+@source inline("dropdown dropdown-top dropdown-left");
+
+:root {
+    /** Brand Identity **/
+    --color-primary: #3559c7;
+}
+
+/** 
+    Since the tailwind upgrade cards have no padding 
+    Also we alaways want a border
+**/
+.card {
+    @apply bg-base-100 border border-base-300;
+    > .card-header {
+        @apply border-b border-base-300 p-4
+    }
+    > .card-body {
+        @apply p-4;
+    }
+}
+
+[data-theme="dark"] {
+    .menu {
+        > li > a > img {
+            filter: invert(0.6);
+        }
+    
+        > li > a.active > img {
+            filter: invert(1);
+        }
+    }
+
+    img.svg-icon {
+        filter: invert(0.6);
+    }
+
+    .dropdown > label > img {
+        filter: invert(0.6);
+    }
+}
+
+
+[data-theme="light"] {
+    /** The default menu is a bit scary **/
+    /**.menu > li > a.menu-active {
+        --menu-active-bg: var(--color-base-300);
+        --menu-active-fg: var(--color-base-content);
+    }**/
+    .menu > li > a.menu-active > img {
+        filter: invert(1);
+    }
+}
+
+/** In the chat the first p has margin, we need to remove it **/
+.response-formatter > p:first-child, #streaming-chat > p:first-child {
+    margin-top: 0;
+}
+
+/** Override daisy cards **/
+.card {
+    &.has-data-table {
+        .card-header {
+            padding-left: 0.75rem;
+        }
+        .card-body {
+            padding: 0;
+    
+            > .table {
+    
+                > tbody > tr:last-child {
+                    border-bottom-width: 0px;
+                }
+            }
+        }
+    }
+}
+
+/** Tables **/
+
+.table td svg {
+    display: inline;
+}
+
+/** Badges / Labels **/
+
+.label-danger {
+    background-color: rgb(255, 240, 238);
+    color: rgb(178, 48, 21);
+    border-color: rgb(250, 199, 190);
+}
+.label-info{
+    background-color: rgb(240, 244, 255);
+    color: rgb(52, 81, 178);
+    border-color: rgb(198, 212, 249);
+}
+.label-neutral {
+    background-color: rgb(241, 243, 245);
+    color: rgb(85, 89, 83);
+    border-color: rgb(216,220,224);
+}
+.label-warning {
+    background-color: rgb(255, 250, 225);
+    color: rgb(148, 105, 0);
+    border-color: rgb(248, 216, 124);
+}
+.label-success {
+    background-color: rgb(235, 249, 235);
+    color: rgb(17, 118, 39);
+    border-color: rgb(183, 223, 186);
+}
+.label-highlight {
+    background-color: rgb(249, 241, 254);
+    color: rgb(121, 58, 175);
+    border-color: rgb(227,204,244);
+}
+
+.alert-danger {
+    background-color: rgb(255, 240, 238);
+    color: rgb(178, 48, 21);
+    border-color: rgb(250, 199, 190);
+}
+.alert-info{
+    background-color: rgb(240, 244, 255);
+    color: rgb(52, 81, 178);
+    border-color: rgb(198, 212, 249);
+}
+.alert-neutral {
+    background-color: rgb(241, 243, 245);
+    color: rgb(85, 89, 83);
+    border-color: rgb(216,220,224);
+}
+.alert-warning {
+    background-color: rgb(255, 250, 225);
+    color: rgb(148, 105, 0);
+    border-color: rgb(248, 216, 124);
+}
+.alert-success {
+    background-color: rgb(235, 249, 235);
+    color: rgb(17, 118, 39);
+    border-color: rgb(183, 223, 186);
+}
+.alert-highlight {
+    background-color: rgb(249, 241, 254);
+    color: rgb(121, 58, 175);
+    border-color: rgb(227,204,244);
+}
+
+/** Drop down menu **/
+.dropdown ul {
+    border: 1px solid var(--default-border-color);
+}

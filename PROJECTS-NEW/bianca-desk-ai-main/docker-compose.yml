@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - server
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "7070:7070"
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+      - ./server/storage:/app/storage
+    environment:
+      - NODE_ENV=development
+      - PORT=7070
+      - FLAMEROUTER_CLOUD_URL=${FLAMEROUTER_CLOUD_URL:-}
+      - FLAMEROUTER_LOCAL_URL=${FLAMEROUTER_LOCAL_URL:-http://localhost:8080}
+      - ESCALATION_WEBHOOK=${ESCALATION_WEBHOOK:-}
+
+volumes:
+  frontend_node_modules:
+  server_node_modules:

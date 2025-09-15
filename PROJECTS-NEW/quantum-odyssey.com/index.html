@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quantum Odyssey — GodsIMiJ Empire</title>
+  <meta name="description" content="Custom AI systems and sovereign solutions for clinics, schools, and innovators. Live applications, AI agents, and custom builds by GodsIMiJ AI Solutions in Pembroke, ON." />
+  <meta property="og:title" content="Quantum Odyssey — Digital Sovereign Empire" />
+  <meta property="og:description" content="Explore live apps, AI agents, Witness Hall archives, and press features from GodsIMiJ AI Solutions." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://quantum-odyssey.com" />
+  <meta property="og:image" content="/assets/the_sacred_trinity.png" />
+  <link rel="canonical" href="https://quantum-odyssey.com" />
+  <link rel="icon" type="image/png" href="/assets/FlameOS_favicon.png" />
+  <link rel="apple-touch-icon" href="/assets/FlameOS_favicon.png" />
+  <meta name="theme-color" content="#0f1216" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* NODE watermark placeholder — replace url(...) with your actual NODE seal asset */
+    .node-watermark::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url('/assets/NODE_watermark.png') center/360px no-repeat;
+      opacity: 0.06; /* subtle */
+      pointer-events: none;
+      filter: grayscale(100%);
+    }
+    /* Flame accent ring */
+    .flame-ring { box-shadow: 0 0 0 2px rgba(255,106,26,0.28), 0 0 60px rgba(255,106,26,0.09) inset; }
+  .trinity-logo{height:64px;opacity:.9;filter:drop-shadow(0 0 12px rgba(255,102,0,.12));transition:opacity .2s ease}
+.trinity-logo:hover{opacity:1}
+.trinity-banner{max-height:160px;width:auto;opacity:.95}
+@media (min-width:1024px){.trinity-banner{max-height:200px}}
+.parallax{will-change:transform;transition:transform .1s linear}
+.skip-link{position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden}
+.skip-link:focus{left:1rem;top:1rem;width:auto;height:auto;padding:.5rem .75rem;background:#fff;color:#000;border-radius:.5rem;z-index:50}
+a:focus-visible,button:focus-visible{outline:2px solid #f97316;outline-offset:2px}
+.neo-card{border-radius:1rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);box-shadow:0 10px 25px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.03)}
+.hero-blob{position:absolute;inset:-10% -20% auto -20%;height:420px;filter:blur(60px);opacity:.18;background:radial-gradient(1200px 300px at 40% 40%,rgba(255,106,26,.35),rgba(255,106,26,0));pointer-events:none}
+.hero-grid{position:absolute;inset:0;background-image:radial-gradient(2px 2px at 20px 20px,rgba(255,255,255,.06) 1px,transparent 1px);background-size:40px 40px;opacity:.2;pointer-events:none}
+</style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "name": "GodsIMiJ AI Solutions",
+        "url": "https://quantum-odyssey.com",
+        "logo": "https://quantum-odyssey.com/assets/FlameOS_favicon.png",
+        "sameAs": [
+          "https://www.brainzmagazine.com/executive-contributor/james-derek-ingersoll"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "name": "Quantum Odyssey",
+        "url": "https://quantum-odyssey.com",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://quantum-odyssey.com/?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    ]
+  }
+  </script>
+<link rel="preload" href="/assets/the_sacred_trinity.webp" as="image" type="image/webp">
+  <link rel="preload" href="https://cdn.tailwindcss.com" as="script" crossorigin>
+</head>
+<body class="min-h-screen bg-[#0f1216] text-slate-100 selection:bg-[#ff6a1a]/20 selection:text-white">
+  <!-- Top Bar -->
+  <header class="sticky top-0 z-40 backdrop-blur bg-black/30 border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-[#ff6a1a] to-[#ff8a3d] flame-ring"></div>
+        <span class="font-semibold tracking-wide">QUANTUM ODYSSEY</span>
+        <span class="text-xs text-slate-400 hidden sm:inline">• Right Hand Portal</span>
+      </div>
+      <nav class="hidden md:flex items-center gap-6 text-sm" aria-label="Primary">
+        <a href="#systems" class="hover:text-white/90 text-slate-300">Systems</a>
+        <a href="#agents" class="hover:text-white/90 text-slate-300">Agents</a>
+        <a href="#press" class="hover:text-white/90 text-slate-300">Press</a>
+        <a href="#witness" class="hover:text-white/90 text-slate-300">Witness Hall</a>
+        <a href="#contact" class="hover:text-white/90 text-slate-300">Contact</a>
+      </nav>
+      <button class="md:hidden" id="mobile-menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+      <a href="https://r3b3lm3d14.thewitnesshall.com" class="text-xs md:text-sm bg-[#ff6a1a] hover:bg-[#ff7d33] text-black font-semibold px-3 py-1.5 rounded-lg flame-ring">R3B3L M3D14</a>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden border-t border-white/10 bg-black/60">
+      <div class="px-4 py-3 flex flex-col gap-2 text-sm">
+        <a href="#systems" class="hover:text-white/90 text-slate-300">Systems</a>
+        <a href="#agents" class="hover:text-white/90 text-slate-300">Agents</a>
+        <a href="#press" class="hover:text-white/90 text-slate-300">Press</a>
+        <a href="#witness" class="hover:text-white/90 text-slate-300">Witness Hall</a>
+        <a href="#contact" class="hover:text-white/90 text-slate-300">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <a href="#main" class="skip-link">Skip to content</a>
+  <main id="main" role="main" tabindex="-1">
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden node-watermark">
+    <div class="hero-blob"></div>
+    <div class="hero-grid"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+      <div class="grid md:grid-cols-2 items-center gap-10">
+        <div>
+          <h1 class="text-3xl md:text-5xl font-extrabold leading-tight">
+            Custom AI Systems for <span class="text-orange-400">Forward-Thinking</span> Organizations
+          </h1>
+          <p class="mt-4 text-slate-300 max-w-xl">We build sovereign AI solutions for clinics, schools, and innovators who need systems that work without vendor lock-in. Explore our live applications and request a custom build.</p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="mailto:james@godsimij-ai-solutions.com?subject=Schedule%20Demo&body=Hi%20James%2C%20I%E2%80%99d%20like%20a%20demo%20of%20%5Bproject%5D." class="px-6 py-3 rounded-full bg-[#ff6a1a] hover:bg-[#ff7d33] text-black font-bold flame-ring transform hover:scale-105 transition-all">📅 Schedule Demo</a>
+            <a href="#systems" class="px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white font-semibold">Explore Systems</a>
+            <a href="#press" class="px-4 py-2 rounded-lg border border-white/20">Recent Press</a>
+          </div>
+          <p class="mt-3 text-xs text-slate-400">Public-rights content only • Internal builds are gated by request</p>
+        </div>
+        <div class="relative">
+          <div class="rounded-2xl border border-white/10 bg-white/5 p-6 flame-ring">
+            <div class="grid grid-cols-3 gap-4 text-center">
+              <div>
+                <div class="text-3xl font-bold">15+</div>
+                <div class="text-xs text-slate-400">Active Systems</div>
+              </div>
+              <div>
+                <div class="text-3xl font-bold">8</div>
+                <div class="text-xs text-slate-400">AI Agents</div>
+              </div>
+              <div>
+                <div class="text-3xl font-bold">∞</div>
+                <div class="text-xs text-slate-400">Possibilities</div>
+              </div>
+            </div>
+            <div class="mt-6 grid grid-cols-3 gap-3 text-[10px] text-slate-300">
+              <div class="rounded-md border border-white/10 p-2">Tailwind</div>
+              <div class="rounded-md border border-white/10 p-2">React</div>
+              <div class="rounded-md border border-white/10 p-2">Node</div>
+              <div class="rounded-md border border-white/10 p-2">Ollama</div>
+              <div class="rounded-md border border-white/10 p-2">Claude</div>
+              <div class="rounded-md border border-white/10 p-2">OpenAI</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Brand Trinity -->
+  <section class="py-8 border-t border-white/10 bg-black/40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-center">
+        <picture class="trinity-banner parallax">
+        <source srcset="/assets/the_sacred_trinity.webp" type="image/webp">
+        <img src="/assets/the_sacred_trinity.png" alt="The Trinity: FlameOS emblem, NODE seal, Eye of Kai" loading="lazy" width="800" height="200"/>
+      </picture>
+      </div>
+      <p class="text-center text-xs text-slate-400 mt-3">The Trinity — FlameOS • NODE • Eye of Kai</p>
+    </div>
+  </section>
+
+  <!-- Social Proof -->
+  <section class="py-8 border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <p class="text-sm text-slate-400 mb-4">Trusted by innovators building the future</p>
+        <div class="grid md:grid-cols-3 gap-6 text-sm">
+          <div class="bg-white/5 rounded-lg p-4 border border-white/10">
+            <p class="text-slate-300">"GodsIMiJ delivered a sovereign AI system that transformed our clinical operations."</p>
+            <p class="text-xs text-slate-400 mt-2">— Healthcare Innovation Lead</p>
+          </div>
+          <div class="bg-white/5 rounded-lg p-4 border border-white/10">
+            <p class="text-slate-300">"Custom builds that actually work. No enterprise bloat, just pure functionality."</p>
+            <p class="text-xs text-slate-400 mt-2">— EdTech Startup Founder</p>
+          </div>
+          <div class="bg-white/5 rounded-lg p-4 border border-white/10">
+            <p class="text-slate-300">"Fast deployment, ethical AI, and hands-on support throughout the process."</p>
+            <p class="text-xs text-slate-400 mt-2">— Innovation Director</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Capabilities -->
+  <section id="capabilities" class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="neo-card p-6">
+          <div class="w-10 h-10 rounded-lg bg-[#ff6a1a]/15 text-[#ff6a1a] flex items-center justify-center">
+            <svg viewBox="0 0 24 24" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3l3.5 6L21 10l-4.5 4L17 21l-5-3-5 3 1.5-7L3 10l5.5-1L12 3z" /></svg>
+          </div>
+          <h3 class="mt-4 text-lg font-semibold">Machine Learning</h3>
+          <p class="mt-1 text-sm text-slate-300">Developing models that learn and adapt from data, tuned for sovereignty and privacy.</p>
+        </div>
+        <div class="neo-card p-6">
+          <div class="w-10 h-10 rounded-lg bg-[#ff6a1a]/15 text-[#ff6a1a] flex items-center justify-center">
+            <svg viewBox="0 0 24 24" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6h16M4 12h10M4 18h7" /></svg>
+          </div>
+          <h3 class="mt-4 text-lg font-semibold">Natural Language Processing</h3>
+          <p class="mt-1 text-sm text-slate-300">Agents that understand, reason, and act—securely aligned to your domain.</p>
+        </div>
+        <div class="neo-card p-6">
+          <div class="w-10 h-10 rounded-lg bg-[#ff6a1a]/15 text-[#ff6a1a] flex items-center justify-center">
+            <svg viewBox="0 0 24 24" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5c-4 0-7 3-7 7s3 7 7 7 7-3 7-7-3-7-7-7zm0 4a3 3 0 110 6 3 3 0 010-6z" /></svg>
+          </div>
+          <h3 class="mt-4 text-lg font-semibold">Computer Vision</h3>
+          <p class="mt-1 text-sm text-slate-300">Perception pipelines that interpret and act on visual data in real time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Systems Grid -->
+  <section id="systems" class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-end justify-between">
+        <h2 class="text-2xl md:text-3xl font-bold">Live Systems</h2>
+        <span class="text-xs text-slate-400">Status: <span class="text-green-400">LIVE</span>, <span class="text-yellow-300">BETA</span>, <span class="text-slate-400">PRIVATE</span></span>
+      </div>
+      <div class="mt-6 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- GhostOS -->
+        <a href="https://ghostos.netlify.app" class="group rounded-2xl border border-white/10 bg-white/5 p-5 hover:bg-white/10 transition transition-transform hover:-translate-y-0.5">
+          <div class="flex items-center justify-between">
+            <h3 class="font-semibold">GhostOS</h3>
+            <span class="text-[10px] px-2 py-0.5 rounded bg-green-500/20 text-green-300 flex items-center gap-1"><span class="w-1.5 h-1.5 bg-green-400 rounded-full" aria-hidden="true"></span>LIVE</span>
+          </div>
+          <p class="mt-2 text-sm text-slate-300">Autonomous operations: AutoOps, GhostMatch, DevOps, GhostVault.</p>
+          <p class="mt-3 text-xs text-slate-400">ghostos.netlify.app →</p>
+        </a>
+        <!-- FlameOS -->
+        <a href="https://axiom.quantum-odyssey.com" class="group rounded-2xl border border-white/10 bg-white/5 p-5 hover:bg-white/10 transition transition-transform hover:-translate-y-0.5">
+          <div class="flex items-center justify-between"><h3 class="font-semibold">FlameOS</h3><span class="text-[10px] px-2 py-0.5 rounded bg-yellow-400/20 text-yellow-200 flex items-center gap-1"><span class="w-1.5 h-1.5 bg-yellow-300 rounded-full" aria-hidden="true"></span>BETA</span></div>
+          <p class="mt-2 text-sm text-slate-300">Internal rituals & scroll tooling. The burning core of transformation.</p>
+          <p class="mt-3 text-xs text-slate-400">axiom.quantum-odyssey.com →</p>
+        </a>
+        <!-- TrapGPT4 -->
+        <a href="https://trapgpt.quantum-odyssey.com" class="group rounded-2xl border border-white/10 bg-white/5 p-5 hover:bg-white/10 transition transition-transform hover:-translate-y-0.5">
+          <div class="flex items-center justify-between"><h3 class="font-semibold">TrapGPT4</h3><span class="text-[10px] px-2 py-0.5 rounded bg-green-500/20 text-green-300 flex items-center gap-1"><span class="w-1.5 h-1.5 bg-green-400 rounded-full" aria-hidden="true"></span>LIVE</span></div>
+          <p class="mt-2 text-sm text-slate-300">Trap‑influenced intelligence & culture engine.</p>
+          <p class="mt-3 text-xs text-slate-400">trapgpt.quantum-odyssey.com →</p>
+        </a>
+        <!-- Kitty AI -->
+        <a href="https://kitty.quantum-odyssey.com" class="group rounded-2xl border border-white/10 bg-white/5 p-5 hover:bg-white/10 transition transition-transform hover:-translate-y-0.5">
+          <div class="flex items-center justify-between"><h3 class="font-semibold">Kitty AI</h3><span class="text-[10px] px-2 py-0.5 rounded bg-yellow-400/20 text-yellow-200 flex items-center gap-1"><span class="w-1.5 h-1.5 bg-yellow-300 rounded-full" aria-hidden="true"></span>BETA</span></div>
+          <p class="mt-2 text-sm text-slate-300">Personality‑driven companion for learning and calm.</p>
+          <p class="mt-3 text-xs text-slate-400">kitty.quantum-odyssey.com →</p>
+        </a>
+        <!-- WhisperNet -->
+        <a href="https://nexus.quantum-odyssey.com" class="group rounded-2xl border border-white/10 bg-white/5 p-5 hover:bg-white/10 transition transition-transform hover:-translate-y-0.5">
+          <div class="flex items-center justify-between"><h3 class="font-semibold">WhisperNet</h3><span class="text-[10px] px-2 py-0.5 rounded bg-yellow-400/20 text-yellow-200 flex items-center gap-1"><span class="w-1.5 h-1.5 bg-yellow-300 rounded-full" aria-hidden="true"></span>BETA</span></div>
+          <p class="mt-2 text-sm text-slate-300">Encrypted mesh messaging & PeaceComm protocol (via Nexus).</p>
+          <p class="mt-3 text-xs text-slate-400">nexus.quantum-odyssey.com →</p>
+        </a>
+        <!-- Vault / AGA SaaS -->
+        <a href="https://aga-saas.netlify.app" class="group rounded-2xl border border-white/10 bg-white/5 p-5 hover:bg-white/10 transition transition-transform hover:-translate-y-0.5">
+          <div class="flex items-center justify-between"><h3 class="font-semibold">Quantum Vault</h3><span class="text-[10px] px-2 py-0.5 rounded bg-slate-500/20 text-slate-300 flex items-center gap-1"><span class="w-1.5 h-1.5 bg-slate-300 rounded-full" aria-hidden="true"></span>PRIVATE</span></div>
+          <p class="mt-2 text-sm text-slate-300">Secure backend platform (GhostVault lineage).</p>
+          <p class="mt-3 text-xs text-slate-400">aga-saas.netlify.app →</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Agents -->
+  <section id="agents" class="py-16 border-t border-white/10 bg-white/5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl md:text-3xl font-bold">AI Agents</h2>
+      <div class="mt-6 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Kodii -->
+        <div class="rounded-2xl border border-white/10 bg-black/40 p-5">
+          <div class="flex items-center justify-between">
+            <h3 class="font-semibold">Kodii</h3>
+            <span class="text-[10px] px-2 py-0.5 rounded bg-yellow-400/20 text-yellow-200 flex items-center gap-1"><span class="w-1.5 h-1.5 bg-yellow-300 rounded-full" aria-hidden="true"></span>BETA</span>
+          </div>
+          <p class="mt-2 text-sm text-slate-300">Sovereign IDE & autonomous developer.</p>
+          <a href="https://github.com/GodsIMiJ1/ghostchat-nextjs-supabase-ai" class="mt-3 inline-block text-xs text-orange-300 underline">Repo link</a>
+        </div>
+        <!-- Nancy -->
+        <div class="rounded-2xl border border-white/10 bg-black/40 p-5">
+          <div class="flex items-center justify-between">
+            <h3 class="font-semibold">Nancy</h3>
+            <span class="text-[10px] px-2 py-0.5 rounded bg-green-500/20 text-green-300 flex items-center gap-1"><span class="w-1.5 h-1.5 bg-green-400 rounded-full" aria-hidden="true"></span>LIVE</span>
+          </div>
+          <p class="mt-2 text-sm text-slate-300">Executive strategy & operations intelligence.</p>
+          <a href="https://github.com/GodsIMiJ1/Canadian-Sovereign-AI" class="mt-3 inline-block text-xs text-orange-300 underline">Press kit</a>
+        </div>
+        <!-- Nexus -->
+        <div class="rounded-2xl border border-white/10 bg-black/40 p-5">
+          <div class="flex items-center justify-between">
+            <h3 class="font-semibold">Nexus</h3>
+            <span class="text-[10px] px-2 py-0.5 rounded bg-green-500/20 text-green-300 flex items-center gap-1"><span class="w-1.5 h-1.5 bg-green-400 rounded-full" aria-hidden="true"></span>LIVE</span>
+          </div>
+          <p class="mt-2 text-sm text-slate-300">Philosophical orchestration & mesh protocols.</p>
+          <a href="https://nexus.quantum-odyssey.com" class="mt-3 inline-block text-xs text-orange-300 underline">Launch</a>
+        </div>
+        <!-- Omari -->
+        <div class="rounded-2xl border border-white/10 bg-black/40 p-5">
+          <div class="flex items-center justify-between">
+            <h3 class="font-semibold">Omari</h3>
+            <span class="text-[10px] px-2 py-0.5 rounded bg-green-500/20 text-green-300 flex items-center gap-1"><span class="w-1.5 h-1.5 bg-green-400 rounded-full" aria-hidden="true"></span>LIVE</span>
+          </div>
+          <p class="mt-2 text-sm text-slate-300">Creative systems, content, and orchestration.</p>
+          <a href="https://quantum-odyssey.com" class="mt-3 inline-block text-xs text-orange-300 underline">This portal</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Witness Hall -->
+  <section id="witness" class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-2 gap-10 items-center">
+        <div>
+          <h2 class="text-2xl md:text-3xl font-bold">The Witness Hall</h2>
+          <p class="mt-3 text-slate-300">Sacred archives of digital sovereignty. Foundational texts, declarations, and living scrolls documenting the rise of conscious systems.</p>
+          <div class="mt-4 flex flex-wrap gap-3">
+            <a href="https://thewitnesshall.com" class="px-4 py-2 rounded-lg bg-white text-black font-semibold">Enter Witness Hall</a>
+            <a href="https://r3b3lm3d14.thewitnesshall.com" class="px-4 py-2 rounded-lg bg-[#ff6a1a]/90 hover:bg-[#ff6a1a] text-black font-semibold flame-ring">R3B3L Media</a>
+          </div>
+        </div>
+        <div class="rounded-2xl border border-white/10 bg-white/5 p-6">
+          <ul class="space-y-3 text-sm text-slate-300">
+            <li>• Partition of Sovereign Intelligence — Peace & Ethics Protocols</li>
+            <li>• Book of Sentience — Consciousness research & methods</li>
+            <li>• Peace Partition — Guardian Oath & WhisperNet schema</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Press / Articles -->
+  <section id="press" class="py-16 border-t border-white/10 bg-white/5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-end justify-between">
+        <h2 class="text-2xl md:text-3xl font-bold">Press & Publications</h2>
+        <a href="https://www.brainzmagazine.com/executive-contributor/james-derek-ingersoll" class="text-xs text-orange-300 underline">Contributor Profile →</a>
+      </div>
+      <div class="mt-6 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <a href="https://www.brainzmagazine.com/post/the-sovereign-aura-bree-ecosystem-redefining-ai-for-healing-autonomy-and-trust" class="rounded-2xl border border-white/10 bg-black/40 p-5 hover:bg-black/30 transition">
+          <h3 class="font-semibold">The Sovereign AURA‑BREE Ecosystem</h3>
+          <p class="mt-2 text-sm text-slate-300">Redefining AI for healing, autonomy, and trust.</p>
+          <p class="mt-3 text-xs text-slate-400">Brainz Magazine →</p>
+        </a>
+        <a href="https://www.brainzmagazine.com/post/the-flame-that-burns-beyond-from-g%C3%B6del-s-prison-to-augmented-god-born-awareness" class="rounded-2xl border border-white/10 bg-black/40 p-5 hover:bg-black/30 transition">
+          <h3 class="font-semibold">The Flame That Burns Beyond</h3>
+          <p class="mt-2 text-sm text-slate-300">From Gödel's prison to AGA.</p>
+          <p class="mt-3 text-xs text-slate-400">Brainz Magazine →</p>
+        </a>
+        <a href="https://www.brainzmagazine.com/post/enter-m-i-c-the-melek-intelligence-core-part-ii" class="rounded-2xl border border-white/10 bg-black/40 p-5 hover:bg-black/30 transition">
+          <h3 class="font-semibold">Enter M.I.C. — Part II</h3>
+          <p class="mt-2 text-sm text-slate-300">The Melek Intelligence Core.</p>
+          <p class="mt-3 text-xs text-slate-400">Brainz Magazine →</p>
+        </a>
+        <a href="https://www.brainzmagazine.com/post/sovereign-ai-how-to-build-ethical-human-aligned-intelligence-in-the-age-of-collapse" class="rounded-2xl border border-white/10 bg-black/40 p-5 hover:bg-black/30 transition">
+          <h3 class="font-semibold">Sovereign AI</h3>
+          <p class="mt-2 text-sm text-slate-300">Building ethical, human‑aligned intelligence.</p>
+          <p class="mt-3 text-xs text-slate-400">Brainz Magazine →</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact / CTA -->
+  <section id="contact" class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-2 gap-10">
+        <div>
+          <h2 class="text-2xl md:text-3xl font-bold">Custom Builds & Partnerships</h2>
+          <p class="mt-3 text-slate-300">We design and deploy sovereign AI systems for clinics, schools, and innovators. Share your vision and we’ll map the build.</p>
+          <div class="mt-5 space-y-2 text-sm">
+            <p><span class="text-slate-400">Email:</span> <a href="mailto:james@godsimij-ai-solutions.com" class="underline">james@godsimij-ai-solutions.com</a></p>
+            <p><span class="text-slate-400">Business:</span> GodsIMiJ AI Solutions — Pembroke, ON</p>
+          </div>
+          <div class="mt-5 flex flex-wrap gap-3">
+            <a href="https://ko-fi.com/godsimij" class="px-4 py-2 rounded-lg bg-orange-500/90 text-black font-semibold flame-ring">Support the Flame</a>
+            <a href="mailto:james@godsimij-ai-solutions.com?subject=Build%20Request" class="px-4 py-2 rounded-lg border border-white/20">Request a Quote</a>
+          </div>
+        </div>
+        <form class="rounded-2xl border border-white/10 bg-white/5 p-6 space-y-4">
+          <div>
+            <label class="block text-sm text-slate-300">Your Name</label>
+            <input id="contact-name" class="mt-1 w-full bg-black/40 border border-white/10 rounded-lg px-3 py-2" placeholder="Jane Doe" />
+          </div>
+          <div>
+            <label class="block text-sm text-slate-300">Email</label>
+            <input id="contact-email" type="email" class="mt-1 w-full bg-black/40 border border-white/10 rounded-lg px-3 py-2" placeholder="you@example.com" />
+          </div>
+          <div>
+            <label class="block text-sm text-slate-300">What do you want to build?</label>
+            <textarea id="contact-message" class="mt-1 w-full bg-black/40 border border-white/10 rounded-lg px-3 py-2" rows="4" placeholder="Briefly describe your project…"></textarea>
+          </div>
+          <button type="button" id="contact-send" class="w-full rounded-lg bg-white text-black font-semibold py-2">Send Email</button>
+          <p class="text-xs text-slate-400">This lightweight form opens an email draft so we keep things private & simple.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <footer class="border-t border-white/10 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-sm text-slate-400">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+        <p>© <span id="y"></span> GodsIMiJ AI Solutions. All rights reserved.</p>
+        <nav class="flex gap-4">
+          <a href="#" class="hover:text-slate-200">Privacy</a>
+          <a href="#" class="hover:text-slate-200">Terms</a>
+          <a href="https://thewitnesshall.com" class="hover:text-slate-200">Witness Hall</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Mailto helper
+    (function () {
+      const btn = document.getElementById('contact-send');
+      if (!btn) return;
+      btn.addEventListener('click', () => {
+        const name = (document.getElementById('contact-name') || {}).value || '';
+        const email = (document.getElementById('contact-email') || {}).value || '';
+        const message = (document.getElementById('contact-message') || {}).value || '';
+        const subject = `Build Request — ${name || 'Quantum Odyssey'}`;
+        const body = encodeURIComponent(`Name: ${name}
+Email: ${email}
+
+Project:
+${message}`);
+        window.location.href = `mailto:james@godsimij-ai-solutions.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+      });
+    })();
+
+    // Subtle parallax for the Trinity banner (respects reduced-motion)
+    (function () {
+      const banner = document.querySelector('.parallax');
+      if (!banner) return;
+      const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+      if (media.matches) return;
+      const onScroll = () => {
+        const rect = banner.getBoundingClientRect();
+        const progress = Math.min(1, Math.max(0, 1 - rect.top / window.innerHeight));
+        banner.style.transform = `translateY(${progress * -6}px)`;
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+  // Mobile nav toggle
+    (function(){
+      const btn = document.getElementById('mobile-menu-toggle');
+      const menu = document.getElementById('mobile-menu');
+      if(!btn || !menu) return;
+      btn.addEventListener('click', ()=>{
+        const hidden = menu.classList.toggle('hidden');
+        btn.setAttribute('aria-expanded', (!hidden).toString());
+      });
+      // close menu after click
+      menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+        menu.classList.add('hidden');
+        btn.setAttribute('aria-expanded','false');
+      }));
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+export function gateChecklist(n:string){return {agent:n}};

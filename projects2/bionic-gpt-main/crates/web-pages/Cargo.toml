@@ -1,0 +1,26 @@
+[package]
+name = "web-pages"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+path = "lib.rs"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+db = { path = "../db" }
+assets = { path = "../web-assets" }
+integrations = { path = "../integrations" }
+openai-api = { path = "../openai-api" }
+axum = { version = "0.8", default-features = false }
+axum-extra = { version = "0.10", features = ["typed-routing"] }
+dioxus = { version = "0.6", default-features = false, features = ["macro", "html", "signals"] }
+dioxus-ssr = { version = "0.6", default-features = false }
+serde = "1"
+serde_json = { version = "1" }
+daisy_rsx = "0.1.29"
+comrak = { version = "0.39.0", features = ["shortcodes"] }
+time = "0.3.36"
+validator = { version = "0.20.0", features = ["derive"] }
+oas3 = "0.16.1"

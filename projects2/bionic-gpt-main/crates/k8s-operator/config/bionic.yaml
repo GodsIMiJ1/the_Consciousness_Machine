@@ -1,0 +1,24 @@
+apiVersion: bionic-gpt.com/v1
+kind: Bionic
+metadata:
+  name: bionic-gpt
+  namespace: bionic-gpt 
+spec:
+  replicas: 1 
+  version: 1.10.14
+  
+  # PgAdmin - Uncomment to install PgAdmin
+  # pgadmin: true
+  # TGI GPU inference engine
+  # gpu: true
+  # Testing mode
+  # testing: true
+
+  # Use by Oauth2 proxy to know where to redirect and also keycloak (if installed)
+  # to know how to set the openid configuration
+  hostname-url: https://localhost
+
+  # Image hashes to protect against supply chain attacks.
+  hash-bionicgpt: sha256:9581c59f864bd8c5ec04fa672c3be29195104a4c42c3a674aa6e9fcf35756ed1
+  hash-bionicgpt-rag-engine: sha256:45d627d35dc87c4ca7ec3aba69fd7ab11befb14151366f9ca600dd0ba21794b8
+  hash-bionicgpt-db-migrations: sha256:aa0cc9fe72ca3c635e8ac12c33b8e3c3a2e59780033bb54798570872f2d42c83

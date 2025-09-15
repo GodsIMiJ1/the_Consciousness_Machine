@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GMIJ Staking Dashboard</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.ethers.io/lib/ethers-5.7.2.umd.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        const { useState, useEffect, useMemo } = React;
+        
+        /**
+         * GMIJ Live Staking Dashboard
+         * Network: Polygon Mainnet (chainId 137)
+         * Contracts:
+         *   - GMIJToken: 0x6D2067cA89F594B6838B793f19250dCcF81bc0d4
+         *   - StakingVault: 0x4085b7f53F49Cc3ebeE5035D0d4072988AC9aDe5
+         */
+        
+        const POLYGON_CHAIN_ID = 137;
+        const RPC_URL = "https://polygon-rpc.com";
+        
+        const ADDR = {
+          TOKEN: "0x6D2067cA89F594B6838B793f19250dCcF81bc0d4",
+          VAULT: "0x4085b7f53F49Cc3ebeE5035D0d4072988AC9aDe5",
+        };
+        
+        // Minimal ERC20 ABI
+        const ERC20_ABI = [
+          "function name() view returns (string)",
+          "function symbol() view returns (string)",
+          "function decimals() view returns (uint8)",
+          "function totalSupply() view returns (uint256)",
+          "function balanceOf(address) view returns (uint256)",
+          "function allowance(address owner, address spender) view returns (uint256)",
+          "function approve(address spender, uint256 amount) returns (bool)",
+          "function transfer(address to, uint256 amount) returns (bool)",
+        ];
+        
+        // StakingVault ABI (subset)
+        const VAULT_ABI = [
+          "function stake(uint256 amount)",
+          "function withdraw(uint256 amount)",
+          "function exit()",
+          "function getReward()",
+          "function earned(address account) view returns (uint256)",
+          "function rewardRate() view returns (uint256)",
+          "function rewardsDuration() view returns (uint256)",
+          "function periodFinish() view returns (uint256)",
+          "function totalSupply() view returns (uint256)",
+          "function balanceOf(address account) view returns (uint256)",
+        ];
+        
+        function fmt(num, decimals = 4) {
+          if (num === null || num === undefined) return "0";
+          const n = Number(num);
+          if (!Number.isFinite(n)) return "0";
+          if (n === 0) return "0";
+          if (n >= 1) return n.toLocaleString(undefined, { maximumFractionDigits: decimals });
+          return n.toPrecision(Math.min(6, decimals + 2));
+        }
+        
+        function useNow(tickMs = 1000) {
+          const [now, setNow] = useState(() => Math.floor(Date.now() / 1000));
+          useEffect(() => {
+            const id = setInterval(() => setNow(Math.floor(Date.now() / 1000)), tickMs);
+            return () => clearInterval(id);
+          }, [tickMs]);
+          return now;
+        }
+        
+        function Countdown({ to }) {
+          const now = useNow(1000);
+          const sec = Math.max(0, (to || 0) - now);
+          const d = Math.floor(sec / 86400);
+          const h = Math.floor((sec % 86400) / 3600);
+          const m = Math.floor((sec % 3600) / 60);
+          const s = sec % 60;
+          return React.createElement('span', null, `${d}d ${h}h ${m}m ${s}s`);
+        }
+        
+        function Card({ title, value, sub, tail }) {
+          return React.createElement('div', {
+            className: "rounded-2xl border border-neutral-800 bg-neutral-900/60 p-5 shadow-sm"
+          }, [
+            React.createElement('p', { key: 'title', className: "text-sm text-neutral-400" }, title),
+            React.createElement('div', {
+              key: 'content',
+              className: "mt-1 flex items-end justify-between gap-2"
+            }, [
+              React.createElement('h3', {
+                key: 'value',
+                className: "text-2xl font-semibold tracking-tight"
+              }, value),
+              tail ? React.createElement('div', {
+                key: 'tail',
+                className: "text-sm text-neutral-400"
+              }, tail) : null
+            ]),
+            sub ? React.createElement('p', {
+              key: 'sub',
+              className: "mt-1 text-xs text-neutral-500"
+            }, sub) : null
+          ]);
+        }
+        
+        function App() {
+          const [provider, setProvider] = useState(null);
+          const [signer, setSigner] = useState(null);
+          const [address, setAddress] = useState("");
+          const [networkOk, setNetworkOk] = useState(false);
+        
+          const [symbol, setSymbol] = useState("GMIJ");
+          const [decimals, setDecimals] = useState(18);
+        
+          const [balToken, setBalToken] = useState(0);
+          const [balVault, setBalVault] = useState(0);
+          const [staked, setStaked] = useState(0);
+          const [earned, setEarned] = useState(0);
+        
+          const [rewardRate, setRewardRate] = useState(0);
+          const [rewardsDuration, setRewardsDuration] = useState(0);
+          const [periodFinish, setPeriodFinish] = useState(0);
+          const [totalStaked, setTotalStaked] = useState(0);
+        
+          const [inputStake, setInputStake] = useState("");
+          const [inputWithdraw, setInputWithdraw] = useState("");
+          const [loading, setLoading] = useState(false);
+          const [status, setStatus] = useState("");
+        
+          const readProvider = useMemo(() => new ethers.providers.JsonRpcProvider(RPC_URL, POLYGON_CHAIN_ID), []);
+        
+          const tokenRead = useMemo(() => new ethers.Contract(ADDR.TOKEN, ERC20_ABI, readProvider), [readProvider]);
+          const vaultRead = useMemo(() => new ethers.Contract(ADDR.VAULT, VAULT_ABI, readProvider), [readProvider]);
+        
+          const tokenWrite = useMemo(() => (signer ? new ethers.Contract(ADDR.TOKEN, ERC20_ABI, signer) : null), [signer]);
+          const vaultWrite = useMemo(() => (signer ? new ethers.Contract(ADDR.VAULT, VAULT_ABI, signer) : null), [signer]);
+        
+          async function connect() {
+            try {
+              if (!window.ethereum) {
+                alert("No wallet detected. Install MetaMask.");
+                return;
+              }
+              const web3Provider = new ethers.providers.Web3Provider(window.ethereum);
+              await web3Provider.send("eth_requestAccounts", []);
+              const network = await web3Provider.getNetwork();
+              if (Number(network.chainId) !== POLYGON_CHAIN_ID) {
+                try {
+                  await window.ethereum.request({
+                    method: "wallet_switchEthereumChain",
+                    params: [{ chainId: "0x89" }], // 137 in hex
+                  });
+                } catch (e) {
+                  alert("Please switch to Polygon in your wallet.");
+                  return;
+                }
+              }
+              const s = web3Provider.getSigner();
+              const addr = await s.getAddress();
+              setProvider(web3Provider);
+              setSigner(s);
+              setAddress(addr);
+              setNetworkOk(true);
+              setStatus("Connected");
+            } catch (e) {
+              console.error(e);
+              setStatus("Connect failed");
+            }
+          }
+        
+          async function refresh() {
+            try {
+              const [sym, dec] = await Promise.all([
+                tokenRead.symbol(),
+                tokenRead.decimals(),
+              ]);
+              setSymbol(sym);
+              setDecimals(Number(dec));
+        
+              const [rt, dur, fin, ts] = await Promise.all([
+                vaultRead.rewardRate(),
+                vaultRead.rewardsDuration(),
+                vaultRead.periodFinish(),
+                vaultRead.totalSupply(),
+              ]);
+              setRewardRate(Number(ethers.utils.formatUnits(rt, dec)));
+              setRewardsDuration(Number(dur));
+              setPeriodFinish(Number(fin));
+              setTotalStaked(Number(ethers.utils.formatUnits(ts, dec)));
+        
+              if (address) {
+                const [bt, bv, st, er] = await Promise.all([
+                  tokenRead.balanceOf(address),
+                  tokenRead.balanceOf(ADDR.VAULT),
+                  vaultRead.balanceOf(address),
+                  vaultRead.earned(address),
+                ]);
+                setBalToken(Number(ethers.utils.formatUnits(bt, dec)));
+                setBalVault(Number(ethers.utils.formatUnits(bv, dec)));
+                setStaked(Number(ethers.utils.formatUnits(st, dec)));
+                setEarned(Number(ethers.utils.formatUnits(er, dec)));
+              } else {
+                const bv = await tokenRead.balanceOf(ADDR.VAULT);
+                setBalVault(Number(ethers.utils.formatUnits(bv, dec)));
+              }
+            } catch (e) {
+              console.error(e);
+            }
+          }
+        
+          useEffect(() => {
+            refresh();
+            const id = setInterval(refresh, 15000);
+            return () => clearInterval(id);
+          }, [address]);
+        
+          async function ensureAllowance(amountWei) {
+            if (!tokenWrite || !signer) throw new Error("Wallet not connected");
+            const owner = await signer.getAddress();
+            const allowance = await tokenWrite.allowance(owner, ADDR.VAULT);
+            if (allowance.gte(amountWei)) return;
+            setStatus("Approving GMIJ...");
+            const tx = await tokenWrite.approve(ADDR.VAULT, amountWei);
+            await tx.wait();
+          }
+        
+          async function onStake() {
+            try {
+              if (!vaultWrite) throw new Error("Connect wallet first");
+              const amt = inputStake.trim();
+              if (!amt || Number(amt) <= 0) return;
+              setLoading(true);
+              const amountWei = ethers.utils.parseUnits(amt, decimals);
+              await ensureAllowance(amountWei);
+              setStatus("Staking...");
+              const tx = await vaultWrite.stake(amountWei);
+              await tx.wait();
+              setStatus("Staked");
+              setInputStake("");
+              refresh();
+            } catch (e) {
+              console.error(e);
+              setStatus("Stake failed");
+            } finally {
+              setLoading(false);
+            }
+          }
+        
+          async function onWithdraw() {
+            try {
+              if (!vaultWrite) throw new Error("Connect wallet first");
+              const amt = inputWithdraw.trim();
+              if (!amt || Number(amt) <= 0) return;
+              setLoading(true);
+              setStatus("Withdrawing...");
+              const tx = await vaultWrite.withdraw(ethers.utils.parseUnits(amt, decimals));
+              await tx.wait();
+              setStatus("Withdrawn");
+              setInputWithdraw("");
+              refresh();
+            } catch (e) {
+              console.error(e);
+              setStatus("Withdraw failed");
+            } finally {
+              setLoading(false);
+            }
+          }
+        
+          async function onClaim() {
+            try {
+              if (!vaultWrite) throw new Error("Connect wallet first");
+              setLoading(true);
+              setStatus("Claiming rewards...");
+              const tx = await vaultWrite.getReward();
+              await tx.wait();
+              setStatus("Rewards claimed");
+              refresh();
+            } catch (e) {
+              console.error(e);
+              setStatus("Claim failed");
+            } finally {
+              setLoading(false);
+            }
+          }
+        
+          async function onExit() {
+            try {
+              if (!vaultWrite) throw new Error("Connect wallet first");
+              setLoading(true);
+              setStatus("Exiting vault...");
+              const tx = await vaultWrite.exit();
+              await tx.wait();
+              setStatus("Exited");
+              refresh();
+            } catch (e) {
+              console.error(e);
+              setStatus("Exit failed");
+            } finally {
+              setLoading(false);
+            }
+          }
+        
+          return React.createElement('div', {
+            className: "min-h-screen w-full bg-neutral-950 text-neutral-100"
+          }, 
+            React.createElement('div', {
+              className: "mx-auto max-w-6xl px-4 py-10"
+            }, [
+              // Header
+              React.createElement('header', {
+                key: 'header',
+                className: "flex items-center justify-between"
+              }, [
+                React.createElement('div', { key: 'title' }, [
+                  React.createElement('h1', {
+                    key: 'h1',
+                    className: "text-2xl font-bold tracking-tight"
+                  }, "GMIJ Staking Dashboard"),
+                  React.createElement('p', {
+                    key: 'subtitle',
+                    className: "text-sm text-neutral-400"
+                  }, "Polygon Mainnet. Vault distributes rewards continuously over the current period.")
+                ]),
+                React.createElement('button', {
+                  key: 'connect',
+                  onClick: connect,
+                  className: "rounded-2xl bg-orange-500 px-4 py-2 font-semibold shadow hover:bg-orange-400"
+                }, address ? `${address.slice(0, 6)}...${address.slice(-4)}` : "Connect Wallet")
+              ]),
+              
+              // Stats Grid 1
+              React.createElement('section', {
+                key: 'stats1',
+                className: "mt-8 grid gap-4 md:grid-cols-3"
+              }, [
+                React.createElement(Card, {
+                  key: 'token',
+                  title: "Your GMIJ",
+                  value: `${fmt(balToken)} ${symbol}`,
+                  sub: "Wallet balance"
+                }),
+                React.createElement(Card, {
+                  key: 'staked',
+                  title: "Your Staked",
+                  value: `${fmt(staked)} ${symbol}`,
+                  sub: "Currently staked"
+                }),
+                React.createElement(Card, {
+                  key: 'earned',
+                  title: "Your Earned",
+                  value: `${fmt(earned)} ${symbol}`,
+                  sub: "Unclaimed rewards"
+                })
+              ]),
+              
+              // Stats Grid 2
+              React.createElement('section', {
+                key: 'stats2',
+                className: "mt-4 grid gap-4 md:grid-cols-3"
+              }, [
+                React.createElement(Card, {
+                  key: 'vault',
+                  title: "Vault Rewards",
+                  value: `${fmt(balVault)} ${symbol}`,
+                  sub: "Vault balance"
+                }),
+                React.createElement(Card, {
+                  key: 'total',
+                  title: "Total Staked",
+                  value: `${fmt(totalStaked)} ${symbol}`,
+                  sub: "All users"
+                }),
+                React.createElement(Card, {
+                  key: 'rate',
+                  title: "Reward Rate",
+                  value: `${fmt(rewardRate, 6)} ${symbol}/sec`,
+                  sub: "Ends in: ",
+                  tail: React.createElement(Countdown, { to: periodFinish })
+                })
+              ]),
+              
+              // Actions
+              React.createElement('section', {
+                key: 'actions',
+                className: "mt-10 grid gap-6 md:grid-cols-2"
+              }, [
+                // Stake section
+                React.createElement('div', {
+                  key: 'stake-section',
+                  className: "rounded-2xl border border-neutral-800 bg-neutral-900/60 p-6"
+                }, [
+                  React.createElement('h2', {
+                    key: 'stake-title',
+                    className: "text-lg font-semibold"
+                  }, "Stake"),
+                  React.createElement('p', {
+                    key: 'stake-desc',
+                    className: "mt-1 text-sm text-neutral-400"
+                  }, "Deposit GMIJ into the vault and start earning rewards."),
+                  React.createElement('div', {
+                    key: 'stake-controls',
+                    className: "mt-4 flex items-center gap-2"
+                  }, [
+                    React.createElement('input', {
+                      key: 'stake-input',
+                      type: "number",
+                      min: "0",
+                      step: "0.000001",
+                      value: inputStake,
+                      onChange: (e) => setInputStake(e.target.value),
+                      placeholder: "Amount",
+                      className: "flex-1 rounded-xl border border-neutral-700 bg-neutral-800/70 px-3 py-2 outline-none focus:ring-2 focus:ring-orange-500"
+                    }),
+                    React.createElement('button', {
+                      key: 'stake-max',
+                      onClick: () => setInputStake(String(Math.max(0, balToken))),
+                      className: "rounded-xl border border-neutral-700 px-3 py-2 text-sm hover:bg-neutral-800"
+                    }, "Max"),
+                    React.createElement('button', {
+                      key: 'stake-btn',
+                      disabled: loading,
+                      onClick: onStake,
+                      className: "rounded-xl bg-orange-500 px-5 py-2 font-semibold hover:bg-orange-400 disabled:opacity-60"
+                    }, "Stake")
+                  ]),
+                  React.createElement('p', {
+                    key: 'stake-balance',
+                    className: "mt-2 text-xs text-neutral-500"
+                  }, `Balance: ${fmt(balToken)} ${symbol}`)
+                ]),
+                
+                // Withdraw section
+                React.createElement('div', {
+                  key: 'withdraw-section',
+                  className: "rounded-2xl border border-neutral-800 bg-neutral-900/60 p-6"
+                }, [
+                  React.createElement('h2', {
+                    key: 'withdraw-title',
+                    className: "text-lg font-semibold"
+                  }, "Withdraw"),
+                  React.createElement('p', {
+                    key: 'withdraw-desc',
+                    className: "mt-1 text-sm text-neutral-400"
+                  }, "You can withdraw after the 7 day cooldown from your last stake."),
+                  React.createElement('div', {
+                    key: 'withdraw-controls',
+                    className: "mt-4 flex items-center gap-2"
+                  }, [
+                    React.createElement('input', {
+                      key: 'withdraw-input',
+                      type: "number",
+                      min: "0",
+                      step: "0.000001",
+                      value: inputWithdraw,
+                      onChange: (e) => setInputWithdraw(e.target.value),
+                      placeholder: "Amount",
+                      className: "flex-1 rounded-xl border border-neutral-700 bg-neutral-800/70 px-3 py-2 outline-none focus:ring-2 focus:ring-orange-500"
+                    }),
+                    React.createElement('button', {
+                      key: 'withdraw-max',
+                      onClick: () => setInputWithdraw(String(Math.max(0, staked))),
+                      className: "rounded-xl border border-neutral-700 px-3 py-2 text-sm hover:bg-neutral-800"
+                    }, "Max"),
+                    React.createElement('button', {
+                      key: 'withdraw-btn',
+                      disabled: loading,
+                      onClick: onWithdraw,
+                      className: "rounded-xl bg-neutral-200 px-5 py-2 font-semibold text-neutral-900 hover:bg-white disabled:opacity-60"
+                    }, "Withdraw")
+                  ]),
+                  React.createElement('p', {
+                    key: 'withdraw-balance',
+                    className: "mt-2 text-xs text-neutral-500"
+                  }, `Staked: ${fmt(staked)} ${symbol}`)
+                ])
+              ]),
+              
+              // Action buttons
+              React.createElement('section', {
+                key: 'buttons',
+                className: "mt-6 flex flex-wrap gap-3"
+              }, [
+                React.createElement('button', {
+                  key: 'claim',
+                  disabled: loading,
+                  onClick: onClaim,
+                  className: "rounded-xl bg-green-500 px-4 py-2 font-semibold text-neutral-900 hover:bg-green-400 disabled:opacity-60"
+                }, "Claim Rewards"),
+                React.createElement('button', {
+                  key: 'exit',
+                  disabled: loading,
+                  onClick: onExit,
+                  className: "rounded-xl bg-red-500 px-4 py-2 font-semibold text-white hover:bg-red-400 disabled:opacity-60"
+                }, "Exit (Withdraw all + Claim)"),
+                React.createElement('p', {
+                  key: 'status',
+                  className: "text-sm text-neutral-400"
+                }, `Status: ${status}`)
+              ]),
+              
+              // Footer
+              React.createElement('footer', {
+                key: 'footer',
+                className: "mt-10 border-t border-neutral-800 pt-6 text-xs text-neutral-500"
+              }, [
+                React.createElement('p', {
+                  key: 'contracts'
+                }, `Contracts: Token ${ADDR.TOKEN} | Vault ${ADDR.VAULT}`),
+                React.createElement('p', {
+                  key: 'disclaimer'
+                }, "This interface uses a public Polygon RPC for reads. For best results connect your wallet and it will use your provider for writes.")
+              ])
+            ])
+          );
+        }
+        
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(React.createElement(App));
+    </script>
+</body>
+</html>

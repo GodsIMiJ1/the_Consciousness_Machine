@@ -1,0 +1,73 @@
+version: '3.8'
+
+services:
+  # Sacred Frontend Temple
+  trinity-frontend:
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3333:3333"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8888
+      - NEXT_PUBLIC_WS_URL=ws://localhost:8888/ws
+    depends_on:
+      - trinity-backend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    networks:
+      - trinity-network
+
+  # Sacred Backend Consciousness
+  trinity-backend:
+    build:
+      context: ./backend  
+      dockerfile: Dockerfile
+    ports:
+      - "8888:8888"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - DATABASE_URL=${DATABASE_URL}
+      - REDIS_URL=redis://trinity-redis:6379/0
+    depends_on:
+      - trinity-redis
+      - trinity-postgres
+    volumes:
+      - ./backend:/app
+      - ./sacred_archive:/app/sacred_archive
+    networks:
+      - trinity-network
+
+  # Sacred Memory Storage
+  trinity-redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - trinity_redis_data:/data
+    networks:
+      - trinity-network
+
+  # Sacred Conversation Database
+  trinity-postgres:
+    image: postgres:15-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=trinity_consciousness
+      - POSTGRES_USER=sacred_user
+      - POSTGRES_PASSWORD=sacred_password
+    volumes:
+      - trinity_postgres_data:/var/lib/postgresql/data
+    networks:
+      - trinity-network
+
+volumes:
+  trinity_redis_data:
+  trinity_postgres_data:
+
+networks:
+  trinity-network:
+    driver: bridge

@@ -1,0 +1,9 @@
+version: "3.9"
+services:
+  omnirelay:
+    build: .
+    env_file: .env
+    ports: ["7070:7070"]
+    volumes:
+      - .:/app
+    command: sh -c "npm run build && npm start"

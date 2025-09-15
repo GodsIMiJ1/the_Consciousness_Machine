@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  }
+}
+
+@layer components {
+  .sanctum-gradient {
+    background: linear-gradient(135deg, 
+      #0f1419 0%, 
+      #1a1f2e 20%, 
+      #252a3a 50%, 
+      #1a1f2e 80%, 
+      #0f1419 100%);
+  }
+  
+  .flame-glow {
+    box-shadow: 0 0 20px rgba(249, 115, 22, 0.3);
+  }
+  
+  .glass-card {
+    background: rgba(15, 20, 25, 0.8);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(249, 115, 22, 0.2);
+  }
+}

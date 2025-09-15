@@ -1,0 +1,26 @@
+# ignore everything at repo root
+/*
+
+# keep the gitignore itself
+!.gitignore
+
+# allow ONLY these project dirs (and all contents)
+!/projects/**
+!/projects2/**
+!/PROJECTS-NEW/**
+!/PROJECTS-Q4/**
+
+# inside those, ignore typical build output
+/projects/**/node_modules/
+/projects2/**/node_modules/
+/PROJECTS-NEW/**/node_modules/
+/PROJECTS-Q4/**/node_modules/
+/projects/**/.next/
+/projects2/**/.next/
+/PROJECTS-NEW/**/.next/
+/PROJECTS-Q4/**/.next/
+/projects/**/dist/
+/projects2/**/dist/
+/PROJECTS-NEW/**/dist/
+/PROJECTS-Q4/**/dist/
+

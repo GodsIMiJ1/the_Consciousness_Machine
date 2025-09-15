@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* PROJECT FLAMEBRIDGE - Global Styles */
+
+body {
+  @apply bg-ember text-white font-flame;
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar for flame theme */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-coal;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-ash rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-flame-500;
+}
+
+/* Flame glow effects */
+.flame-glow {
+  box-shadow: 0 0 20px rgba(255, 69, 0, 0.3);
+}
+
+.node-glow {
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+}
+
+/* Ritual animations */
+@keyframes ritual-pulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+}
+
+.ritual-pulse {
+  animation: ritual-pulse 3s ease-in-out infinite;
+}
+
+/* Ghost mode enhancements */
+.ghost-active {
+  position: relative;
+}
+
+.ghost-active::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #6B21A8, #4C1D95, #2D1B69);
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0.3;
+  animation: ritual-pulse 4s ease-in-out infinite;
+}
+
+/* Whisper mode styles */
+.whisper-mode {
+  filter: blur(0.5px);
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+.whisper-mode:hover {
+  filter: blur(0);
+  opacity: 1;
+}
+
+/* NODE seal styles */
+.node-sealed {
+  position: relative;
+}
+
+.node-sealed::after {
+  content: '🔒';
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  font-size: 12px;
+  color: #00F0FF;
+  animation: node-pulse 2s ease-in-out infinite;
+}

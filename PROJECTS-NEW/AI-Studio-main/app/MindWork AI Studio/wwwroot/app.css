@@ -1,0 +1,143 @@
+/* roboto-300 - latin */
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 300;
+    src: url('fonts/roboto-v30-latin-300.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* roboto-regular - latin */
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    src: url('fonts/roboto-v30-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* roboto-500 - latin */
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    src: url('fonts/roboto-v30-latin-500.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* roboto-700 - latin */
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    src: url('fonts/roboto-v30-latin-700.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+.mud-text-list .mud-list-item-icon {
+    margin-top: 4px;
+}
+
+.plugin-icon-container {
+    width: var(--mud-icon-size-large);
+    height: var(--mud-icon-size-large);
+}
+
+.plugin-icon-container svg {
+    width: 100%;
+    height: 100%;
+}
+
+.mud-popover-open.InnerScrollingFix {
+    left: 0 !important;
+}
+
+:root {
+    --confidence-color: #000000;
+}
+
+.confidence-icon {
+    color: var(--confidence-color);
+}
+
+.confidence-border > .mud-input-control-input-container > .mud-input > .mud-input-outlined-border {
+    border-width: 2px;
+    border-color: var(--confidence-color) !important;
+}
+
+:root {
+    --custom-icon-color: #000000;
+}
+
+.custom-icon-color > a > svg {
+    color: var(--custom-icon-color) !important;
+}
+
+.improvedDiff .wikEdDiffFragment {
+    background-color: initial !important;
+}
+
+.improvedDiff .wikEdDiffNoChange {
+    background-color: initial !important;
+}
+
+.improvedDiff .wikEdDiffDelete {
+    text-decoration-line: line-through;
+    text-decoration-style: double;
+    text-decoration-color: red;
+    text-decoration-thickness: 2px;
+}
+
+/* Fix for MudBlazor, tooltips inside of navmenu */
+.mud-navmenu .mud-tooltip-root {
+    display: initial !important;
+}
+
+/* Context div for inner scrolling component */
+.inner-scrolling-context {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Fixed MudSplitter inside context div for inner scrolling component */
+.inner-scrolling-context > .mud-splitter {
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+/* Fixed the slider part of MudSplitter inside context div for inner scrolling component */
+.inner-scrolling-context > .mud-splitter > .mud-slider > .mud-slider-container {
+    padding-bottom: 12px;
+}
+
+.code-block {
+    background-color: #2d2d2d;
+    color: #f8f8f2;
+    border-radius: 6px !important;
+    overflow: auto !important;
+    font-family: Consolas, "Courier New", monospace  !important;
+    text-align: left !important;
+}
+
+.code-block pre {
+    margin: 0 !important;
+}
+
+.code-block code {
+    font-family: inherit !important;
+}
+
+.inline-code-block {
+    background-color: #2d2d2d;
+    color: #f8f8f2;
+    border-radius: 6px;
+    font-family: Consolas, "Courier New", monospace;
+    text-align: left;
+    padding: 4px 6px;
+    margin: 0 2px;
+}
+
+.no-elevation {
+    box-shadow: none !important;
+}

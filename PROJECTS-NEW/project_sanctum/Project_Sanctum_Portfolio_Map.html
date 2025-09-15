@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Project Sanctum — Portfolio Map</title>
+  <style>
+    :root { --bg:#0b0b10; --panel:#12121a; --text:#e5e5ef; --muted:#9aa0a6; --accent:#ffb300; --ring:#ff8c00; --card:#1a1a26; --chip:#222232; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, 'Helvetica Neue', Arial; color: var(--text); background: radial-gradient(1200px 600px at 20% -10%, rgba(255,140,0,.10), transparent), radial-gradient(900px 400px at 80% 10%, rgba(0,200,255,.08), transparent), var(--bg); }
+    header { position: sticky; top: 0; z-index: 9; backdrop-filter: blur(8px); border-bottom: 1px solid #ffffff14; background: linear-gradient(180deg, #0b0b1088, #0b0b1000); }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 16px; }
+    h1 { margin: 0; font-size: 22px; }
+    .row { display:flex; gap: 12px; align-items:center; flex-wrap: wrap; }
+    .pill { background: var(--chip); border: 1px solid #ffffff1a; padding: 4px 10px; border-radius: 999px; font-size: 12px; color: #d8d8e0; }
+    input, select { background: #0f0f17; border: 1px solid #ffffff1a; color: var(--text); border-radius: 10px; padding: 10px 12px; outline: none; }
+    input:focus { border-color: var(--ring); box-shadow: 0 0 0 3px #ff8c0033; }
+    .grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+    .card { background: var(--card); border:1px solid #ffffff14; border-radius: 16px; padding: 14px; }
+    .card h3 { margin: 0 0 6px; font-size: 16px; }
+    .muted { color: var(--muted); font-size: 12px; }
+    .section-title { margin: 12px 0 6px; font-weight:600; color:#cbd5e1; }
+    #sky { width:100%; height:360px; display:block; border-radius: 16px; border:1px solid #ffffff14; background: #0c0c14; }
+    .footer { color: #9aa0a6; font-size:12px; padding: 16px; text-align:center; border-top: 1px solid #ffffff14; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap row">
+      <div style="width:36px;height:36px;border-radius:12px;background:linear-gradient(135deg,#ff8c00,#ffb300);box-shadow:0 0 24px #ff8c0066;"></div>
+      <div>
+        <h1>Project Sanctum — Portfolio Map</h1>
+        <div class="muted">82 catalogued projects across the Empire · local-first, sovereign, and fast</div>
+      </div>
+      <div class="row" style="margin-left:auto">
+        <input id="search" placeholder="Search projects…" />
+        <select id="folder">
+          <option value="">All Folders</option>
+          <option>projects</option>
+          <option>Projects</option>
+          <option>PROJECTS-NEW</option>
+        </select>
+        <select id="category">
+          <option value="">All Categories</option>
+        </select>
+        <span class="pill" id="count-pill">0 shown</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="section-title">Constellations (category clusters)</div>
+    <canvas id="sky"></canvas>
+
+    <div class="section-title">Projects</div>
+    <div class="grid" id="grid"></div>
+  </main>
+
+  <div class="footer">NODE · Project Sanctum — Omari’s field kit · No frameworks, just HTML+JS.</div>
+
+<script>
+const DATA = [{"folder": "projects", "category": "AI/ML & Development Tools", "name": "agenticSeek", "desc": "AI-powered search system"}, {"folder": "projects", "category": "AI/ML & Development Tools", "name": "ai-podcast", "desc": "Audio/podcast generation"}, {"folder": "projects", "category": "AI/ML & Development Tools", "name": "bionic-gpt-main", "desc": "GPT implementation"}, {"folder": "projects", "category": "AI/ML & Development Tools", "name": "goose", "desc": "Development tool with extensive documentation"}, {"folder": "projects", "category": "AI/ML & Development Tools", "name": "ghostvault-relaycore", "desc": "Core relay system"}, {"folder": "projects", "category": "AI/ML & Development Tools", "name": "rebelux-ai", "desc": "AI platform"}, {"folder": "projects", "category": "Chat/Communication", "name": "neon-cyber-chat-forge", "desc": "Chat interface"}, {"folder": "projects", "category": "Chat/Communication", "name": "kitty-cyber-buddy", "desc": "Interactive companion"}, {"folder": "projects", "category": "Chat/Communication", "name": "TrapGPT_v4", "desc": "Conversational AI"}, {"folder": "projects", "category": "Media/Content", "name": "ghostcast-minimal/standalone", "desc": "Podcast tools"}, {"folder": "projects", "category": "Media/Content", "name": "bark", "desc": "Audio processing"}, {"folder": "projects", "category": "Media/Content", "name": "daelum", "desc": "Content system"}, {"folder": "projects", "category": "Media/Content", "name": "peace-partition-ark-code", "desc": "Archive system"}, {"folder": "projects", "category": "Gaming/Entertainment", "name": "KittyAI-FlameOS", "desc": "Gaming platform"}, {"folder": "projects", "category": "Gaming/Entertainment", "name": "temple-of-screaming-walls", "desc": "Game project"}, {"folder": "projects", "category": "Gaming/Entertainment", "name": "nexus-sanctuary", "desc": "Virtual environment"}, {"folder": "projects", "category": "Gaming/Entertainment", "name": "TimeMirrorSanctum", "desc": "Time-based application"}, {"folder": "projects", "category": "System/Core", "name": "MIC-GENESIS-FLAMECORE", "desc": "Core flame system"}, {"folder": "projects", "category": "System/Core", "name": "GodsIMiJ_Sigil_Logo_Kit", "desc": "Branding assets"}, {"folder": "projects", "category": "System/Core", "name": "Axiom-rh-01", "desc": "System component"}, {"folder": "projects", "category": "System/Core", "name": "The Witness Hall", "desc": "Documentation/archive"}, {"folder": "Projects", "category": "Operating Systems", "name": "FlameOS_v1.0.0", "desc": "Complete OS with TypeScript daemon system"}, {"folder": "Projects", "category": "Operating Systems", "name": "AURA-BREE", "desc": "AI-powered interface system"}, {"folder": "Projects", "category": "AI Platforms", "name": "rebelux-ai", "desc": "AI development platform"}, {"folder": "Projects", "category": "AI Platforms", "name": "sylvie-flamecopilot", "desc": "AI coding assistant"}, {"folder": "Projects", "category": "AI Platforms", "name": "The_MONK-main", "desc": "Spiritual/meditation AI"}, {"folder": "Projects", "category": "AI Platforms", "name": "TrapGPT_Final-Form", "desc": "Advanced conversational AI"}, {"folder": "Projects", "category": "AI Platforms", "name": "kai-content-symphony-v2", "desc": "Content generation"}, {"folder": "Projects", "category": "AI Platforms", "name": "MAXBot", "desc": "Multi-purpose bot"}, {"folder": "Projects", "category": "Development Tools", "name": "authorly-promptopia-main", "desc": "Prompt engineering"}, {"folder": "Projects", "category": "Development Tools", "name": "bitchat-main", "desc": "Chat application"}, {"folder": "Projects", "category": "Development Tools", "name": "MiniCodex-master", "desc": "Code documentation"}, {"folder": "Projects", "category": "Development Tools", "name": "system-prompts-and-models-of-ai-tools-main", "desc": "AI model collection"}, {"folder": "Projects", "category": "Development Tools", "name": "generators", "desc": "Code generation tools"}, {"folder": "Projects", "category": "Development Tools", "name": "Mechanika", "desc": "Development framework"}, {"folder": "Projects", "category": "Gaming/Interactive", "name": "GhostMatch", "desc": "Matching/gaming system"}, {"folder": "Projects", "category": "Gaming/Interactive", "name": "Pseudo_Kai_Rebel_Engine", "desc": "Game engine"}, {"folder": "Projects", "category": "Gaming/Interactive", "name": "Gremliverse", "desc": "Virtual world"}, {"folder": "Projects", "category": "Gaming/Interactive", "name": "ghostdeck-ritual-control", "desc": "Interface system"}, {"folder": "Projects", "category": "Gaming/Interactive", "name": "Ghost_Family", "desc": "Family management"}, {"folder": "Projects", "category": "Gaming/Interactive", "name": "GHOSTFLOW-DOJO", "desc": "Training/learning platform"}, {"folder": "Projects", "category": "Content/Media", "name": "The-Digital-Bible", "desc": "Digital content system"}, {"folder": "PROJECTS-NEW", "category": "Healthcare/Clinical", "name": "AURA-BREE_SOVEREIGN", "desc": "React/Vite sovereign AI care system with mobile support"}, {"folder": "PROJECTS-NEW", "category": "Healthcare/Clinical", "name": "AURA-BREE_Clinical_dashboard", "desc": "Clinical management"}, {"folder": "PROJECTS-NEW", "category": "Healthcare/Clinical", "name": "Pembroke Methadone Clinic Pitch", "desc": "Healthcare presentation with React/Vite"}, {"folder": "PROJECTS-NEW", "category": "Healthcare/Clinical", "name": "methadone-clinic-dashboard", "desc": "Clinic management"}, {"folder": "PROJECTS-NEW", "category": "Healthcare/Clinical", "name": "aura-bree-sovereign-care-landingpage", "desc": "Healthcare landing page"}, {"folder": "PROJECTS-NEW", "category": "Healthcare/Clinical", "name": "Dr.Mentor", "desc": "Medical mentoring"}, {"folder": "PROJECTS-NEW", "category": "AI Development", "name": "AI-Studio-main", "desc": "AI development environment"}, {"folder": "PROJECTS-NEW", "category": "AI Development", "name": "GhostKingAI-clean/main", "desc": "Clean AI implementation"}, {"folder": "PROJECTS-NEW", "category": "AI Development", "name": "bianca-desk-ai-main", "desc": "Desktop AI assistant"}, {"folder": "PROJECTS-NEW", "category": "AI Development", "name": "MaxbotAI_v3.1", "desc": "Bot platform v3.1"}, {"folder": "PROJECTS-NEW", "category": "AI Development", "name": "melek-flame-core", "desc": "Core AI system"}, {"folder": "PROJECTS-NEW", "category": "AI Development", "name": "scroll-nexus-ai", "desc": "AI documentation system"}, {"folder": "PROJECTS-NEW", "category": "Content/Learning", "name": "aura-bree-guide/main", "desc": "User guide system"}, {"folder": "PROJECTS-NEW", "category": "Content/Learning", "name": "metha-learn-forge-main", "desc": "Learning platform"}, {"folder": "PROJECTS-NEW", "category": "Content/Learning", "name": "prompt-mastery-webapp", "desc": "Prompt engineering training"}, {"folder": "PROJECTS-NEW", "category": "Content/Learning", "name": "consciousness-machine-campaign-app", "desc": "Campaign platform"}, {"folder": "PROJECTS-NEW", "category": "Development Platforms", "name": "FLAMEWRITE_V1", "desc": "Writing/development platform"}, {"folder": "PROJECTS-NEW", "category": "Development Platforms", "name": "flame-forge-nexus-main", "desc": "Development nexus"}, {"folder": "PROJECTS-NEW", "category": "Development Platforms", "name": "echo-flame-sanctum", "desc": "Development sanctuary"}, {"folder": "PROJECTS-NEW", "category": "Development Platforms", "name": "empire-nexus-showcase", "desc": "Showcase platform"}, {"folder": "PROJECTS-NEW", "category": "Development Platforms", "name": "project_sanctum", "desc": "Core development project"}, {"folder": "PROJECTS-NEW", "category": "Communication/Relay", "name": "Omari Omnirelay", "desc": "Communication relay"}, {"folder": "PROJECTS-NEW", "category": "Communication/Relay", "name": "omnirelay/omnirelay_full", "desc": "Full relay implementation"}, {"folder": "PROJECTS-NEW", "category": "Pitch/Presentation", "name": "AURA-BREE Pitch Deck", "desc": "Business presentation materials"}];
+
+// Build category list
+const catSet = new Set(DATA.map(d => d.category));
+const categorySel = document.getElementById('category');
+[...catSet].sort().forEach(c => { const o=document.createElement('option'); o.textContent=c; categorySel.appendChild(o); });
+
+const grid = document.getElementById('grid');
+const searchEl = document.getElementById('search');
+const folderSel = document.getElementById('folder');
+const countPill = document.getElementById('count-pill');
+
+function render() {
+  const q = (searchEl.value || '').toLowerCase();
+  const f = folderSel.value;
+  const c = categorySel.value;
+
+  const filtered = DATA.filter(d =>
+    (!f || d.folder === f) &&
+    (!c || d.category === c) &&
+    (!q || d.name.toLowerCase().includes(q) || d.desc.toLowerCase().includes(q))
+  );
+
+  countPill.textContent = `${filtered.length} shown`;
+  grid.innerHTML = filtered.map(d => `
+    <div class="card">
+      <div class="row" style="justify-content:space-between;">
+        <h3>${d.name}</h3>
+        <span class="pill">${d.folder}</span>
+      </div>
+      <div class="muted">${d.desc}</div>
+      <div class="row" style="margin-top:8px;">
+        <span class="pill">${d.category}</span>
+      </div>
+    </div>
+  `).join('');
+  drawSky(filtered);
+}
+
+searchEl.addEventListener('input', render);
+folderSel.addEventListener('change', render);
+categorySel.addEventListener('change', render);
+
+// Constellation canvas (radial layout by category)
+const sky = document.getElementById('sky');
+const ctx = sky.getContext('2d');
+
+function drawSky(items) {
+  const W = sky.clientWidth, H = sky.clientHeight;
+  const dpr = window.devicePixelRatio || 1;
+  sky.width = W * dpr; sky.height = H * dpr; ctx.setTransform(dpr,0,0,dpr,0,0);
+  ctx.clearRect(0,0,W,H);
+
+  const cats = [...new Set(items.map(x => x.category))];
+  const R = Math.min(W,H) * 0.35;
+  const cx = W/2, cy = H/2;
+  const anchors = new Map();
+  cats.forEach((c,i) => {
+    const a = (i / Math.max(1,cats.length)) * Math.PI*2 - Math.PI/2;
+    anchors.set(c, { x: cx + R*Math.cos(a), y: cy + R*Math.sin(a) });
+  });
+
+  ctx.strokeStyle = '#ffffff18';
+  ctx.lineWidth = 1;
+  items.forEach((it, i) => {
+    const a = anchors.get(it.category) || {x:cx,y:cy};
+    const angle = (i / Math.max(1,items.length)) * Math.PI*2;
+    const r = 40 + (i%12)*6;
+    const x = a.x + Math.cos(angle) * r * 0.6;
+    const y = a.y + Math.sin(angle) * r * 0.6;
+
+    ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(x,y); ctx.stroke();
+
+    ctx.beginPath();
+    ctx.fillStyle = '#ffb300';
+    ctx.arc(x,y,3,0,Math.PI*2);
+    ctx.fill();
+  });
+
+  cats.forEach(c => {
+    const a = anchors.get(c);
+    ctx.beginPath(); ctx.fillStyle = '#00d4ff'; ctx.arc(a.x,a.y,5,0,Math.PI*2); ctx.fill();
+    ctx.fillStyle = '#9aa0a6'; ctx.font = '12px ui-sans-serif, system-ui'; ctx.textAlign='center'; ctx.fillText(c, a.x, a.y - 10);
+  });
+
+  ctx.fillStyle = '#9aa0a6'; ctx.font = '12px ui-sans-serif, system-ui'; ctx.textAlign='center';
+  ctx.fillText('Category anchors (blue) with project nodes (amber)', cx, H-12);
+}
+
+render();
+</script>
+</body>
+</html>

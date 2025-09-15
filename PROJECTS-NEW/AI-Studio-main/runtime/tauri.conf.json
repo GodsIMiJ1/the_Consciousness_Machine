@@ -1,0 +1,89 @@
+{
+  "build": {
+    "devPath": "ui/",
+    "distDir": "ui/",
+    "withGlobalTauri": false
+  },
+  "package": {
+    "productName": "MindWork AI Studio",
+	"version": "0.9.50"
+  },
+  "tauri": {
+    "allowlist": {
+      "all": false,
+      "shell": {
+        "sidecar": true,
+        "all": false,
+        "open": true,
+        "scope": [
+          {
+            "name": "../app/MindWork AI Studio/bin/dist/mindworkAIStudioServer",
+            "sidecar": true,
+            "args": true
+          }
+        ]
+      },
+      "http" : {
+        "all": true,
+        "request": true,
+        "scope": [
+          "http://localhost"
+        ]
+      },
+      "fs": {
+        "scope": ["$RESOURCE/resources/*"]
+      }
+    },
+    "windows": [
+      {
+        "fullscreen": false,
+        "resizable": true,
+        "title": "MindWork AI Studio",
+        "width": 1920,
+        "height": 1080
+      }
+    ],
+    "security": {
+      "csp": null,
+      "dangerousRemoteDomainIpcAccess": [
+        {
+          "domain": "localhost",
+          "windows": ["main"],
+          "enableTauriAPI": true
+        }
+      ]
+    },
+    "bundle": {
+      "active": true,
+      "targets": "all",
+      "identifier": "com.github.mindwork-ai.ai-studio",
+      "externalBin": [
+        "../app/MindWork AI Studio/bin/dist/mindworkAIStudioServer"
+      ],
+      "resources": [
+        "resources/*"
+      ],
+      "macOS": {
+        "exceptionDomain": "localhost"
+      },
+      "icon": [
+        "icons/32x32.png",
+        "icons/128x128.png",
+        "icons/128x128@2x.png",
+        "icons/icon.icns",
+        "icons/icon.ico"
+      ]
+    },
+    "updater": {
+      "active": true,
+      "endpoints": [
+        "https://github.com/MindWorkAI/AI-Studio/releases/latest/download/latest.json"
+      ],
+      "dialog": false,
+      "windows": {
+        "installMode": "passive"
+      },
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDM3MzE4MTM4RTNDMkM0NEQKUldSTnhNTGpPSUV4TjFkczFxRFJOZWgydzFQN1dmaFlKbXhJS1YyR1RKS1RnR09jYUpMaGsrWXYK"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "name": "aesha-server",
+  "version": "1.0.0",
+  "description": "🔮 AESHA Relay - Sovereign AI Backend for GhostVault FlameCore",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "echo \"AESHA Server Test\" && exit 0"
+  },
+  "keywords": [
+    "aesha",
+    "flamecore",
+    "ghostvault",
+    "ai",
+    "sovereign"
+  ],
+  "author": "GodsIMiJ Empire",
+  "license": "PROPRIETARY",
+  "dependencies": {
+    "axios": "^1.6.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "helmet": "^7.1.0",
+    "uuid": "^9.0.1",
+    "winston": "^3.11.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

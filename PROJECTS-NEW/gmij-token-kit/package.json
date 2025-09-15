@@ -1,0 +1,24 @@
+{
+  "name": "gmij-token-kit",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "build": "hardhat compile",
+    "deploy:base-sepolia": "hardhat run scripts/deploy.js --network baseSepolia",
+    "verify:base-sepolia": "hardhat verify --network baseSepolia",
+    "deploy:polygon": "hardhat run scripts/deploy.js --network polygon",
+    "deploy:polygon-amoy": "hardhat run scripts/deploy.js --network polygonAmoy",
+    "seed-rewards:polygon": "hardhat run scripts/seed-rewards.js --network polygon",
+    "verify:polygon": "hardhat verify --network polygon",
+    "verify:polygon-amoy": "hardhat verify --network polygonAmoy"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "hardhat": "^2.22.5",
+    "dotenv": "^16.4.5"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.0.2"
+  }
+}

@@ -1,0 +1,22 @@
+[package]
+name = "integrations"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+path = "lib.rs"
+
+[dependencies]
+openai-api = { path = "../openai-api" }
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1" }
+tracing = { version = "0.1" }
+axum = { version = "0.8" }
+chrono = { version = "0.4" }
+db = { path = "../db" }
+tokio = { version = "1", features = ["rt", "rt-multi-thread"] }
+async-trait = { version = "0.1" }
+oas3 = "0.16.1"
+oauth2 = "5.0.0"
+rag-engine = { path = "../rag-engine" }
+reqwest = { version = "0", default-features = false, features = ["json", "rustls-tls"] }

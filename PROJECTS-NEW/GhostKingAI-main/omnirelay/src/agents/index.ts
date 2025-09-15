@@ -1,0 +1,1 @@
+export type Agent={name:string;canHandle:(i:string)=>boolean;handle:(i:string,p:any,m:any)=>Promise<any>};

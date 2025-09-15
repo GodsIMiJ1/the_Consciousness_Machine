@@ -1,0 +1,1 @@
+export function licenseGate(input:any){return {ok:true}};

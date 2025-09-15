@@ -1,0 +1,1 @@
+export const techOps={name:'TechOps',canHandle:(i:string)=>false,handle:async()=>({})};

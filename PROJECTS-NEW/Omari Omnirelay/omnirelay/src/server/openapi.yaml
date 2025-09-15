@@ -1,0 +1,83 @@
+openapi: 3.0.3
+info:
+  title: Omnirelay Public API
+  version: "1.0.0"
+servers:
+  - url: https://your-domain.example/api/v1
+paths:
+  /health:
+    get:
+      summary: API health
+      responses:
+        "200":
+          description: OK
+  /intents:invoke:
+    post:
+      summary: Invoke an intent via supervisor
+      security: [{ ApiKeyAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                intent: { type: string }
+                payload: { type: object }
+                meta: { type: object }
+              required: [intent]
+      responses:
+        "200":
+          description: Invocation result
+  /webhooks:
+    get:
+      summary: List webhooks
+      security: [{ ApiKeyAuth: [] }]
+      responses: { "200": { description: OK } }
+    post:
+      summary: Register a webhook
+      security: [{ ApiKeyAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                url: { type: string }
+                secret: { type: string }
+                events:
+                  type: array
+                  items: { type: string }
+      responses: { "200": { description: OK } }
+  /webhooks/{id}:
+    delete:
+      summary: Remove a webhook
+      security: [{ ApiKeyAuth: [] }]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses: { "200": { description: OK } }
+  /events:emit:
+    post:
+      summary: Emit a test event to registered webhooks
+      security: [{ ApiKeyAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type: { type: string }
+                data: { type: object }
+              required: [type]
+      responses: { "200": { description: OK } }
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key

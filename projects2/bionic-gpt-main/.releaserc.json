@@ -1,0 +1,46 @@
+{
+    "branches": ["main"],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      ["@semantic-release/github", {
+        "successComment": false,
+        "failTitle": false,
+        "assets": [
+          {"path": "tmp/earthly/chrome-video.mp4", "label": "chrome-video.mp4"}
+        ]
+      }],
+      ["@semantic-release-plus/docker", {
+          "name": "ghcr.io/bionic-gpt/bionicgpt:latest",
+          "skipLogin": true
+      }],
+      ["@semantic-release-plus/docker", {
+          "name": "ghcr.io/bionic-gpt/bionicgpt-k8s-operator:latest",
+          "skipLogin": true
+      }],
+      ["@semantic-release-plus/docker", {
+          "name": "ghcr.io/bionic-gpt/bionicgpt-db-migrations:latest",
+          "skipLogin": true
+      }],
+      ["@semantic-release-plus/docker", {
+          "name": "ghcr.io/bionic-gpt/bionicgpt-rag-engine:latest",
+          "skipLogin": true
+      }],
+      ["@semantic-release-plus/docker", {
+          "name": "ghcr.io/bionic-gpt/bionicgpt-airbyte-connector:latest",
+          "skipLogin": true
+      }],
+      ["@semantic-release/exec", {
+        "publishCmd": "./update-config.sh ${nextRelease.version}",
+        "execCwd": "./.github/workflows"
+      }],
+      ["@semantic-release/exec", {
+        "publishCmd": "./update-version.sh ${nextRelease.version}",
+        "execCwd": "./.github/workflows"
+      }],
+      ["@semantic-release/exec", {
+        "publishCmd": "./update-git.sh ${nextRelease.version}",
+        "execCwd": "./.github/workflows"
+      }]
+    ]
+  }

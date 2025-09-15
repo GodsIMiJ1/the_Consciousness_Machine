@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <link rel="prefetch" href="https://firebase-studio-1757620381137.cluster-2xid2zxbenc4ixa74rpk7q7fyk.cloudworkstations.dev/cde-9ef6f7dd54098eb46098549eea4c7f48abeb3ae1/static/out/vs/code/browser/workbench/workbench.css" as="style">
+    <link rel="prefetch" href="https://firebase-studio-1757620381137.cluster-2xid2zxbenc4ixa74rpk7q7fyk.cloudworkstations.dev/www/monospace.js" as="script">
+    <link rel="prefetch" href="https://firebase-studio-1757620381137.cluster-2xid2zxbenc4ixa74rpk7q7fyk.cloudworkstations.dev/cde-9ef6f7dd54098eb46098549eea4c7f48abeb3ae1/static/out/vs/code/browser/workbench/workbench.js" as="script">
+    <link rel="prefetch" href="https://firebase-studio-1757620381137.cluster-2xid2zxbenc4ixa74rpk7q7fyk.cloudworkstations.dev/cde-9ef6f7dd54098eb46098549eea4c7f48abeb3ae1/static/out/nls.messages.js" as="script">
+    <link rel="prefetch" href="https://firebase-studio-1757620381137.cluster-2xid2zxbenc4ixa74rpk7q7fyk.cloudworkstations.dev/cde-9ef6f7dd54098eb46098549eea4c7f48abeb3ae1/static/out/vs/workbench/api/worker/extensionHostWorker.esm.js" as="script">
+    <link rel="prefetch" href="https://firebase-studio-1757620381137.cluster-2xid2zxbenc4ixa74rpk7q7fyk.cloudworkstations.dev/cde-9ef6f7dd54098eb46098549eea4c7f48abeb3ae1/static/out/vs/editor/common/services/editorSimpleWorker.esm.js" as="script">
+  </head>
+  <body>
+    <script type="text/javascript">
+      (function (window) {
+        if (window.top === window) {
+          return;
+        }
+        function wsUrl(path) {
+          return (
+            (window.location.protocol === "https:" ? "wss://" : "ws://") +
+            window.location.host +
+            path
+          );
+        }
+        const channel = new MessageChannel();
+
+        function setupWebSocket() {
+          const socket = new WebSocket(wsUrl("/env/state"));
+          channel.port1.onmessage = function (msg) {
+            socket.send(JSON.stringify(msg.data));
+          };
+          socket.onclose = function (e) {
+            setTimeout(setupWebSocket, 1000);
+          };
+          socket.onmessage = function (msg) {
+            const payload = JSON.parse(msg.data);
+            const isInitializing = payload.server?.state === "templateCreating" || payload.server?.state === "tryGitClone";
+            const state = payload.env;
+            if (isInitializing) {
+              channel.port1.postMessage({
+                type: "env-state",
+                payload: { state: "instantiating" },
+              });
+            } else if (state === undefined) {
+              channel.port1.postMessage({
+                type: "env-state",
+                payload: { state: "unknown" },
+              });
+            } else {
+              channel.port1.postMessage({
+                type: "env-state",
+                payload: state,
+              });
+            }
+          };
+        }
+        window.top.postMessage(
+          { monospaceMessageType: "env-state-port" },
+          "*",
+          [channel.port2]
+        );
+        setupWebSocket();
+      })(window);
+    </script>
+  
+
+</body></html>

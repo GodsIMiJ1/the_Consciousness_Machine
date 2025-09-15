@@ -1,0 +1,28 @@
+.dashboard {
+  padding: 20px;
+  background-color: #1e1e1e;
+  color: #ffffff;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.stat-card {
+  background-color: #2e2e2e;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  width: 30%;
+}
+
+.heat-map {
+  text-align: center;
+}
+
+.heat-map img {
+  max-width: 100%;
+  border-radius: 8px;
+}

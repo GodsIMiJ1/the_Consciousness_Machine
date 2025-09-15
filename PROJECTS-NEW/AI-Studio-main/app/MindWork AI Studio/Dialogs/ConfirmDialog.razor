@@ -1,0 +1,16 @@
+@inherits MSGComponentBase
+<MudDialog>
+    <DialogContent>
+        <MudJustifiedText Typo="Typo.body1">
+            @this.Message
+        </MudJustifiedText>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="@this.Cancel" Variant="Variant.Filled">
+            @T("No")
+        </MudButton>
+        <MudButton OnClick="@this.Confirm" Variant="Variant.Filled" Color="Color.Error">
+            @T("Yes")
+        </MudButton>
+    </DialogActions>
+</MudDialog>

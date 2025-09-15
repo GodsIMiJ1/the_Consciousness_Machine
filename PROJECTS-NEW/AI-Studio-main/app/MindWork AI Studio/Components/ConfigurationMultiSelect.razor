@@ -1,0 +1,21 @@
+@inherits ConfigurationBaseCore
+@typeparam TData
+
+<MudSelectExtended
+    T="TData"
+    MultiSelection="@true"
+    MultiSelectionTextFunc="@this.GetMultiSelectionText"
+    SelectedValues="@this.SelectedValues()"
+    Strict="@true"
+    Disabled="@this.IsDisabled"
+    Margin="Margin.Dense"
+    Class="rounded-lg"
+    Underline="false"
+    SelectedValuesChanged="@this.OptionChanged">
+        @foreach (var data in this.Data)
+        {
+            <MudSelectItemExtended Value="@data.Value">
+                @data.Name
+            </MudSelectItemExtended>
+        }
+</MudSelectExtended>

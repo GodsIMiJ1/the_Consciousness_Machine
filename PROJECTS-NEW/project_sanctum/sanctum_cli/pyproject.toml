@@ -1,0 +1,11 @@
+[project]
+name = "project-sanctum-cli"
+version = "0.1.0"
+description = "Project Sanctum — Sovereign CLI to index, search, and catalog local projects."
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{name="GodsIMiJ AI Solutions", email="james@godsimij-ai-solutions.com"}]
+dependencies = []
+
+[project.scripts]
+sanctum = "sanctum_cli.cli:main"

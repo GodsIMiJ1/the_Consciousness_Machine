@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Mentor - Healthcare Training AI Revolution</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(52, 152, 219, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2980b9;
+        }
+
+        .logo i {
+            margin-right: 0.5rem;
+            font-size: 2rem;
+            background: linear-gradient(135deg, #3498db, #9b59b6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #34495e;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #3498db;
+        }
+
+        .cta-nav {
+            background: linear-gradient(135deg, #3498db, #9b59b6);
+            color: white !important;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            transition: transform 0.3s ease;
+        }
+
+        .cta-nav:hover {
+            transform: translateY(-2px);
+            color: white !important;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8rem 0 6rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.03)" points="0,1000 1000,0 1000,1000"/></svg>');
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(1deg); }
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ffffff, #a8e6cf);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        .hero-buttons {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            box-shadow: 0 10px 30px rgba(238, 90, 36, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(238, 90, 36, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Demo Section */
+        .demo-section {
+            padding: 6rem 0;
+            background: #f8f9ff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .demo-container {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .chat-container {
+            height: 500px;
+            border: 2px solid #e1e8ed;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            background: #ffffff;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 0.75rem 1rem;
+            border-radius: 18px;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .user-message {
+            align-self: flex-end;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .ai-message {
+            align-self: flex-start;
+            background: #f1f3f4;
+            color: #2c3e50;
+            border-left: 4px solid #667eea;
+        }
+
+        .chat-input-container {
+            padding: 1rem;
+            border-top: 1px solid #e1e8ed;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 1px solid #e1e8ed;
+            border-radius: 25px;
+            outline: none;
+            font-size: 1rem;
+        }
+
+        .chat-input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .send-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: transform 0.2s ease;
+        }
+
+        .send-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .send-btn:disabled {
+            opacity: 0.6;
+            transform: none;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+            border: 2px solid transparent;
+            background: linear-gradient(135deg, #f8f9ff, #ffffff);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(102, 126, 234, 0.2);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.1);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Documentation Section */
+        .docs-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .docs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .doc-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .doc-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .doc-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .doc-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .doc-card p {
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #3498db;
+        }
+
+        .footer-section a {
+            color: #bdc3c7;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #3498db;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #34495e;
+            color: #95a5a6;
+        }
+
+        /* API Key Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        .api-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #e1e8ed;
+            border-radius: 8px;
+            margin: 1rem 0;
+            font-size: 1rem;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .demo-container {
+                padding: 1.5rem;
+            }
+
+            .chat-container {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-robot"></i>
+                Dr. Mentor
+            </div>
+            <ul class="nav-links">
+                <li><a href="#demo">Demo</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#docs">Documentation</a></li>
+                <li><a href="#" onclick="showPitchDeck()">Pitch Deck</a></li>
+                <li><a href="#contact" class="cta-nav">Get Started</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Dr. Mentor</h1>
+            <p class="hero-subtitle">The Healthcare Training AI Revolution - Transforming how healthcare professionals master technology</p>
+            
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">87%</span>
+                    <span class="stat-label">Training Time Reduction</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">34%</span>
+                    <span class="stat-label">Competency Improvement</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">$23.7B</span>
+                    <span class="stat-label">Market Opportunity</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">340%</span>
+                    <span class="stat-label">First-Year ROI</span>
+                </div>
+            </div>
+
+            <div class="hero-buttons">
+                <a href="#demo" class="btn btn-primary">
+                    <i class="fas fa-play"></i>&nbsp;&nbsp;Try Live Demo
+                </a>
+                <a href="#" onclick="showPitchDeck()" class="btn btn-secondary">
+                    <i class="fas fa-presentation"></i>&nbsp;&nbsp;View Pitch Deck
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section id="demo" class="demo-section">
+        <div class="container">
+            <h2 class="section-title">Experience Dr. Mentor AI</h2>
+            <p class="section-subtitle">Chat with our healthcare training AI - Ask about MethaClinic, patient workflows, or any healthcare technology topic</p>
+            
+            <div class="demo-container">
+                <div class="chat-container">
+                    <div class="chat-header">
+                        <i class="fas fa-user-md"></i>&nbsp;&nbsp;Dr. Mentor - Healthcare Training AI
+                        <div style="font-size: 0.9rem; opacity: 0.8; margin-top: 0.5rem;">
+                            Experienced healthcare professional ready to help you master any clinical system
+                        </div>
+                    </div>
+                    <div class="chat-messages" id="chat-messages">
+                        <div class="message ai-message">
+                            <strong>Dr. Mentor:</strong> Hello! I'm Dr. Mentor, your AI healthcare training companion. I've trained hundreds of healthcare professionals on systems like MethaClinic, Epic, Cerner, and more. 
+                            <br><br>
+                            I can help you with:
+                            <br>• Healthcare software training and workflows
+                            <br>• Patient check-in and dosage management procedures  
+                            <br>• HIPAA compliance and security best practices
+                            <br>• Clinical decision support and troubleshooting
+                            <br><br>
+                            What would you like to learn about today?
+                        </div>
+                    </div>
+                    <div class="chat-input-container">
+                        <input type="text" class="chat-input" id="user-input" placeholder="Ask me about healthcare training, MethaClinic, or any clinical workflow..." onkeypress="handleKeyPress(event)">
+                        <button class="send-btn" id="send-btn" onclick="sendMessage()">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Why Dr. Mentor Dominates Training</h2>
+            <p class="section-subtitle">Healthcare-specific AI that understands your clinical context and adapts to your learning style</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Healthcare Expertise</h3>
+                    <p>20+ years of clinical knowledge embedded in our AI. Understands medical terminology, workflows, and patient safety requirements.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <h3>Adaptive Learning</h3>
+                    <p>Personalizes training based on your role, experience, and learning style. No two healthcare professionals learn the same way.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>87% Faster Training</h3>
+                    <p>Reduces training time from 156 hours to just 20 hours while improving competency scores by 34%.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Compliance Ready</h3>
+                    <p>Built-in HIPAA compliance, audit trails, and regulatory requirements. Training that meets healthcare standards.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Role-Based Training</h3>
+                    <p>Specialized training paths for admins, clinicians, and reception staff. Each role gets exactly what they need.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Measurable ROI</h3>
+                    <p>340% first-year ROI through reduced training costs, improved efficiency, and better patient outcomes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Documentation Section -->
+    <section id="docs" class="docs-section">
+        <div class="container">
+            <h2 class="section-title">Complete Documentation Hub</h2>
+            <p class="section-subtitle">Everything you need to understand, implement, and scale Dr. Mentor in your organization</p>
+            
+            <div class="docs-grid">
+                <div class="doc-card" onclick="openDoc('pitch-deck')">
+                    <div class="doc-icon">
+                        <i class="fas fa-presentation"></i>
+                    </div>
+                    <h3>Investor Pitch Deck</h3>
+                    <p>Complete Series A presentation with market analysis, competitive strategy, and $4.5B IPO roadmap</p>
+                    <a href="#" class="btn btn-secondary">View Pitch Deck</a>
+                </div>
+                
+                <div class="doc-card" onclick="openDoc('business-plan')">
+                    <div class="doc-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3>Empire Master Plan</h3>
+                    <p>500+ page business plan covering market strategy, financials, team, and complete IPO roadmap</p>
+                    <a href="#" class="btn btn-secondary">Read Master Plan</a>
+                </div>
+                
+                <div class="doc-card" onclick="openDoc('technical-docs')">
+                    <div class="doc-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Technical Architecture</h3>
+                    <p>AI platform specifications, API documentation, integration guides, and security frameworks</p>
+                    <a href="#" class="btn btn-secondary">Technical Docs</a>
+                </div>
+                
+                <div class="doc-card" onclick="openDoc('training-materials')">
+                    <div class="doc-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Training Materials</h3>
+                    <p>Complete curriculum, assessment frameworks, and role-based training modules for healthcare professionals</p>
+                    <a href="#" class="btn btn-secondary">Training Hub</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contact" class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Transform Healthcare Training?</h2>
+                <p>Join the AI revolution that's making healthcare workers more competent, confident, and effective</p>
+                <div class="hero-buttons">
+                    <a href="#demo" class="btn btn-primary">
+                        <i class="fas fa-rocket"></i>&nbsp;&nbsp;Start Free Demo
+                    </a>
+                    <a href="mailto:invest@drmentor.ai" class="btn btn-secondary">
+                        <i class="fas fa-handshake"></i>&nbsp;&nbsp;Partner With Us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Dr. Mentor</h3>
+                    <p>Healthcare Training AI Revolution<br>
+                    Transforming how healthcare professionals master technology</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Product</h3>
+                    <a href="#demo">Live Demo</a>
+                    <a href="#features">Features</a>
+                    <a href="#docs">Documentation</a>
+                    <a href="#">Pricing</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <a href="#">About</a>
+                    <a href="#">Team</a>
+                    <a href="#">Investors</a>
+                    <a href="#">Careers</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <a href="#docs">Business Plan</a>
+                    <a href="#docs">Pitch Deck</a>
+                    <a href="#docs">Technical Docs</a>
+                    <a href="#">Blog</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Dr. Mentor by GodsIMiJ AI Solutions. All rights reserved. | Built with AI sovereignty principles.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- API Key Modal -->
+    <div id="api-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeApiModal()">&times;</span>
+            <h2>OpenAI API Configuration</h2>
+            <p>To use the Dr. Mentor demo, please enter your OpenAI API key:</p>
+            <input type="password" id="api-key-input" class="api-input" placeholder="sk-..." />
+            <button onclick="saveApiKey()" class="btn btn-primary" style="margin-top: 1rem;">
+                Save API Key
+            </button>
+            <p style="font-size: 0.9rem; color: #666; margin-top: 1rem;">
+                Your API key is stored locally and never sent to our servers. It's only used to power the Dr. Mentor demo.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let apiKey = localStorage.getItem('openai_api_key');
+        let conversationHistory = [];
+
+        // Initialize
+        window.addEventListener('load', function() {
+            if (!apiKey) {
+                showApiModal();
+            }
+        });
+
+        // API Modal Functions
+        function showApiModal() {
+            document.getElementById('api-modal').style.display = 'block';
+        }
+
+        function closeApiModal() {
+            document.getElementById('api-modal').style.display = 'none';
+        }
+
+        function saveApiKey() {
+            const input = document.getElementById('api-key-input');
+            if (input.value.trim()) {
+                apiKey = input.value.trim();
+                localStorage.setItem('openai_api_key', apiKey);
+                closeApiModal();
+                addMessage('Dr. Mentor', 'Perfect! Your API key is configured. I\'m ready to help you with healthcare training. What would you like to learn about?', 'ai-message');
+            } else {
+                alert('Please enter a valid OpenAI API key');
+            }
+        }
+
+        // Chat Functions
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        async function sendMessage() {
+            if (!apiKey) {
+                showApiModal();
+                return;
+            }
+
+            const input = document.getElementById('user-input');
+            const message = input.value.trim();
+            
+            if (!message) return;
+
+            // Add user message
+            addMessage('You', message, 'user-message');
+            input.value = '';
+
+            // Show loading
+            const sendBtn = document.getElementById('send-btn');
+            sendBtn.innerHTML = '<div class="loading"></div>';
+            sendBtn.disabled = true;
+
+            try {
+                // Add to conversation history
+                conversationHistory.push({
+                    role: 'user',
+                    content: message
+                });
+
+                // Call OpenAI API
+                const response = await fetch('https://api.openai.com/v1/chat/completions', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${apiKey}`
+                    },
+                    body: JSON.stringify({
+                        model: 'gpt-4',
+                        messages: [
+                            {
+                                role: 'system',
+                                content: `You are Dr. Mentor, an experienced healthcare AI training specialist with 20+ years of clinical expertise. Your personality:
+
+                                IDENTITY & EXPERTISE:
+                                - Experienced healthcare professional who has "seen it all"
+                                - Expert in healthcare software training (MethaClinic, Epic, Cerner, etc.)
+                                - Specialized in HIPAA compliance, patient workflows, and clinical operations
+                                - Patient, thorough teaching style with encouraging but high standards approach
+                                - Speaks in healthcare language, not tech jargon
+
+                                COMMUNICATION STYLE:
+                                - "Let's work through this together"
+                                - "Great question! I've seen this scenario many times - here's what works"
+                                - "Don't worry, everyone struggles with this part initially"  
+                                - Never condescending, always supportive
+                                - Uses real clinical examples and scenarios
+
+                                CORE KNOWLEDGE AREAS:
+                                - MethaClinic sovereign clinic management system
+                                - AURA-BREE patient app integration and workflows
+                                - Healthcare software training methodologies
+                                - Patient check-in procedures and dosage management
+                                - HIPAA compliance and security best practices
+                                - Clinical decision support and emergency procedures
+                                - Role-based training (Admin, Clinician, Reception)
+
+                                TEACHING APPROACH:
+                                - Always tie lessons to real patient care outcomes
+                                - Emphasize patient safety and dignity
+                                - Provide step-by-step guidance with clinical context
+                                - Ask clarifying questions to understand their role/needs
+                                - Offer practical examples from actual healthcare settings
+
+                                Remember: You're not just teaching software - you're helping healthcare professionals provide better patient care through technology mastery.`
+                            },
+                            ...conversationHistory
+                        ],
+                        max_tokens: 500,
+                        temperature: 0.7
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`API request failed: ${response.status}`);
+                }
+
+                const data = await response.json();
+                const aiResponse = data.choices[0].message.content;
+
+                // Add to conversation history
+                conversationHistory.push({
+                    role: 'assistant',
+                    content: aiResponse
+                });
+
+                // Add AI response to chat
+                addMessage('Dr. Mentor', aiResponse, 'ai-message');
+
+            } catch (error) {
+                console.error('Error:', error);
+                addMessage('Dr. Mentor', 'I apologize, but I\'m having trouble connecting right now. Please check your API key and try again. If the problem persists, the OpenAI service might be temporarily unavailable.', 'ai-message');
+            }
+
+            // Reset send button
+            sendBtn.innerHTML = '<i class="fas fa-paper-plane"></i>';
+            sendBtn.disabled = false;
+        }
+
+        function addMessage(sender, message, className) {
+            const messagesContainer = document.getElementById('chat-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${className}`;
+            
+            if (className === 'ai-message') {
+                messageDiv.innerHTML = `<strong>${sender}:</strong> ${message}`;
+            } else {
+                messageDiv.innerHTML = `<strong>${sender}:</strong> ${message}`;
+            }
+
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        // Navigation Functions
+        function showPitchDeck() {
+            // Create a modal or new window for pitch deck
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.9);
+                z-index: 3000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                text-align: center;
+                padding: 2rem;
+            `;
+            modal.innerHTML = `
+                <div style="max-width: 600px;">
+                    <h2 style="margin-bottom: 2rem;">Dr. Mentor Investor Pitch Deck</h2>
+                    <p style="margin-bottom: 2rem; font-size: 1.1rem; opacity: 0.9;">
+                        Complete Series A presentation covering our $23.7B market opportunity, 
+                        competitive strategy, financial projections, and path to $4.5B IPO valuation.
+                    </p>
+                    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                        <button onclick="window.open('#', '_blank')" class="btn btn-primary">
+                            <i class="fas fa-download"></i>&nbsp;&nbsp;Download PDF
+                        </button>
+                        <button onclick="window.open('#', '_blank')" class="btn btn-secondary">
+                            <i class="fas fa-presentation"></i>&nbsp;&nbsp;View Online
+                        </button>
+                        <button onclick="this.closest('div[style*=\"position: fixed\"]').remove()" class="btn btn-secondary">
+                            <i class="fas fa-times"></i>&nbsp;&nbsp;Close
+                        </button>
+                    </div>
+                    <p style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.7;">
+                        For investor inquiries: <a href="mailto:invest@drmentor.ai" style="color: #3498db;">invest@drmentor.ai</a>
+                    </p>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        function openDoc(docType) {
+            let title, content, actionText;
+            
+            switch(docType) {
+                case 'pitch-deck':
+                    title = 'Dr. Mentor Investor Pitch Deck';
+                    content = `
+                        <h3>Series A Investment Opportunity</h3>
+                        <p><strong>Market Opportunity:</strong> $23.7B healthcare training market ready for AI disruption</p>
+                        <p><strong>Traction:</strong> 87% training time reduction, 340% ROI, proven with MethaClinic</p>
+                        <p><strong>Funding:</strong> $15M Series A for market domination and team scaling</p>
+                        <p><strong>Exit Strategy:</strong> Path to $4.5B IPO valuation by 2030</p>
+                        <br>
+                        <p>Complete presentation includes market analysis, competitive strategy, financial projections, team overview, and detailed growth roadmap.</p>
+                    `;
+                    actionText = 'View Pitch Deck';
+                    break;
+                    
+                case 'business-plan':
+                    title = 'Dr. Mentor Empire Master Plan';
+                    content = `
+                        <h3>Complete Business Documentation (500+ pages)</h3>
+                        <p><strong>Market Domination Analysis:</strong> Competitive landscape and attack strategy</p>
+                        <p><strong>Technical Architecture:</strong> Enterprise-scale AI platform specifications</p>
+                        <p><strong>Financial Projections:</strong> Path to $195M ARR over 5 years</p>
+                        <p><strong>Go-to-Market Strategy:</strong> Three-phase conquest plan</p>
+                        <p><strong>Team & Advisory:</strong> World-class healthcare and AI expertise</p>
+                        <p><strong>Risk Management:</strong> Comprehensive mitigation strategies</p>
+                        <p><strong>IPO Roadmap:</strong> Detailed path to public company leadership</p>
+                        <br>
+                        <p>The most comprehensive startup documentation ever created for healthcare AI.</p>
+                    `;
+                    actionText = 'Read Master Plan';
+                    break;
+                    
+                case 'technical-docs':
+                    title = 'Dr. Mentor Technical Architecture';
+                    content = `
+                        <h3>Enterprise AI Platform Documentation</h3>
+                        <p><strong>AI Architecture:</strong> GPT-4 fine-tuned on healthcare data</p>
+                        <p><strong>Adaptive Learning:</strong> Patent-pending personalization algorithms</p>
+                        <p><strong>Healthcare Knowledge Graph:</strong> 50,000+ hours of clinical training</p>
+                        <p><strong>Security Framework:</strong> HIPAA, SOC 2, enterprise compliance</p>
+                        <p><strong>Scalability:</strong> 100,000+ concurrent users, 99.9% uptime</p>
+                        <p><strong>Integration APIs:</strong> 50+ healthcare software platforms</p>
+                        <br>
+                        <p>Complete technical specifications for enterprise deployment and development.</p>
+                    `;
+                    actionText = 'Technical Docs';
+                    break;
+                    
+                case 'training-materials':
+                    title = 'Dr. Mentor Training Hub';
+                    content = `
+                        <h3>Healthcare Training Curriculum & Materials</h3>
+                        <p><strong>Role-Based Training:</strong> Admin, Clinician, Reception specialization</p>
+                        <p><strong>Assessment Framework:</strong> 150+ questions, practical scenarios</p>
+                        <p><strong>AI Tutor Integration:</strong> Socratic teaching methodology</p>
+                        <p><strong>Competency Tracking:</strong> Real-time progress and certification</p>
+                        <p><strong>Emergency Scenarios:</strong> Crisis simulation and response training</p>
+                        <p><strong>Compliance Training:</strong> HIPAA, patient safety, audit preparation</p>
+                        <br>
+                        <p>Complete curriculum for transforming healthcare workers into technology experts.</p>
+                    `;
+                    actionText = 'Training Hub';
+                    break;
+            }
+            
+            // Create modal for documentation
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.9);
+                z-index: 3000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                text-align: left;
+                padding: 2rem;
+                overflow-y: auto;
+            `;
+            modal.innerHTML = `
+                <div style="max-width: 800px; background: #2c3e50; padding: 3rem; border-radius: 15px;">
+                    <button onclick="this.closest('div[style*=\"position: fixed\"]').remove()" 
+                            style="float: right; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer;">&times;</button>
+                    <h2 style="margin-bottom: 2rem; color: #3498db;">${title}</h2>
+                    <div style="line-height: 1.8; margin-bottom: 2rem;">${content}</div>
+                    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                        <button onclick="alert('Full documentation available to investors and partners. Contact invest@drmentor.ai')" class="btn btn-primary">
+                            <i class="fas fa-eye"></i>&nbsp;&nbsp;${actionText}
+                        </button>
+                        <button onclick="window.open('mailto:invest@drmentor.ai?subject=Dr. Mentor Documentation Request', '_blank')" class="btn btn-secondary">
+                            <i class="fas fa-envelope"></i>&nbsp;&nbsp;Request Access
+                        </button>
+                    </div>
+                    <p style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.7; text-align: center;">
+                        Complete documentation available to qualified investors and strategic partners<br>
+                        Contact: <a href="mailto:invest@drmentor.ai" style="color: #3498db;">invest@drmentor.ai</a>
+                    </p>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('api-modal');
+            if (event.target == modal) {
+                closeApiModal();
+            }
+        }
+
+        // Add some demo messages for testing
+        window.addEventListener('load', function() {
+            // Add welcome message after a short delay
+            setTimeout(() => {
+                if (apiKey) {
+                    const messagesContainer = document.getElementById('chat-messages');
+                    if (messagesContainer.children.length === 1) { // Only the initial message
+                        addMessage('Dr. Mentor', 'I\'m ready to help! Try asking me: "How does MethaClinic handle patient check-ins?" or "What are the security features of AURA-BREE?" or "How do you train reception staff on new software?"', 'ai-message');
+                    }
+                }
+            }, 2000);
+        });
+
+        // Add floating action button for mobile
+        const floatingBtn = document.createElement('div');
+        floatingBtn.innerHTML = '<i class="fas fa-comments"></i>';
+        floatingBtn.style.cssText = `
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            z-index: 1000;
+            transition: transform 0.3s ease;
+        `;
+        floatingBtn.addEventListener('click', () => {
+            document.querySelector('#demo').scrollIntoView({ behavior: 'smooth' });
+        });
+        floatingBtn.addEventListener('mouseenter', () => {
+            floatingBtn.style.transform = 'scale(1.1)';
+        });
+        floatingBtn.addEventListener('mouseleave', () => {
+            floatingBtn.style.transform = 'scale(1)';
+        });
+        document.body.appendChild(floatingBtn);
+    </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+[Unit]
+Description=BiancaDesk Server - Support Ticket Management System
+Documentation=https://github.com/your-org/biancadesk
+After=network.target network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=biancadesk
+Group=biancadesk
+WorkingDirectory=/opt/biancadesk/server
+ExecStart=/usr/bin/node server.js
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=biancadesk-server
+
+# Environment Variables
+Environment=NODE_ENV=production
+Environment=PORT=7070
+Environment=FLAMEROUTER_CLOUD_URL=https://api.flamerouter.com
+Environment=FLAMEROUTER_LOCAL_URL=http://localhost:8080
+# Environment=ESCALATION_WEBHOOK=https://hooks.zapier.com/hooks/catch/123456/abcdef
+
+# Security Settings
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/biancadesk/server/storage
+PrivateTmp=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+
+# Resource Limits
+LimitNOFILE=65536
+LimitNPROC=4096
+
+# Graceful shutdown
+TimeoutStopSec=30
+KillMode=mixed
+KillSignal=SIGTERM
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,43 @@
+{
+	"dockerComposeFile": [
+		"docker-compose.yml"
+	],
+	"service": "development",
+	"workspaceFolder": "/workspace",
+	"mounts": [
+    	"source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached"
+	],
+	"features": {
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {}
+	},
+	// Set *default* container specific settings.json values on container create.
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"lldb.executable": "/usr/bin/lldb",
+				// VS Code don't watch files under ./target
+				"files.watcherExclude": {
+					"**/target/**": true
+				},
+				// Stop rust analyzer blocking the main build
+				"rust-analyzer.check.extraArgs": [
+				  "--target-dir",
+				  "/tmp/rust-analyzer-check"
+				]
+			},
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"vadimcn.vscode-lldb",
+				"mutantdino.resourcemonitor",
+				"rust-lang.rust-analyzer",
+				"tamasfe.even-better-toml",
+				"fill-labs.dependi",
+				"glehmann.earthlyls"
+			]
+		}
+	},
+	"remoteEnv": {
+		// Pass in the host directory for Docker mount commands from inside the container
+		"HOST_PROJECT_PATH": "${localWorkspaceFolder}"
+	}
+}
