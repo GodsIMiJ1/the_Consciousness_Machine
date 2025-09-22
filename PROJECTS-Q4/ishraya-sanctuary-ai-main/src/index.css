@@ -1,0 +1,259 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Ishraya Design System - Silver-White Mystic Theme */
+
+@layer base {
+  :root {
+    /* Mystic Light Theme - Silver & White with Cyan Accents */
+    --background: 0 0% 98%;
+    --foreground: 240 6% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 6% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 6% 10%;
+
+    --primary: 197 100% 50%; /* Mystic Cyan */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 85%; /* Silver */
+    --secondary-foreground: 240 6% 10%;
+
+    --muted: 0 0% 94%;
+    --muted-foreground: 240 4% 46%;
+
+    --accent: 197 71% 90%; /* Soft Cyan */
+    --accent-foreground: 240 6% 10%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 88%;
+    --input: 0 0% 94%;
+    --ring: 197 100% 50%;
+
+    --radius: 0.75rem;
+
+    /* Ishraya-specific colors */
+    --mystic-silver: 0 0% 75%;
+    --mystic-white: 0 0% 98%;
+    --mystic-cyan: 197 100% 50%;
+    --mystic-blue: 217 71% 53%;
+    --soul-glow: 197 100% 70%;
+    --memory-accent: 260 100% 80%;
+    
+    /* Gradients */
+    --gradient-mystic: linear-gradient(135deg, hsl(var(--mystic-white)), hsl(var(--mystic-silver)));
+    --gradient-soul: radial-gradient(circle, hsl(var(--soul-glow) / 0.3), transparent 70%);
+    --gradient-memory: linear-gradient(90deg, hsl(var(--mystic-cyan) / 0.1), hsl(var(--memory-accent) / 0.1));
+    --gradient-glyph: conic-gradient(from 0deg, hsl(var(--mystic-cyan) / 0.2), hsl(var(--mystic-blue) / 0.1), hsl(var(--mystic-cyan) / 0.2));
+
+    /* Shadows & Glows */
+    --shadow-mystic: 0 4px 20px -4px hsl(var(--mystic-cyan) / 0.1);
+    --shadow-soul: 0 0 30px hsl(var(--soul-glow) / 0.5);
+    --shadow-memory: 0 2px 10px -2px hsl(var(--memory-accent) / 0.2);
+
+    /* Animations */
+    --transition-mystic: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-soul: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    --sidebar-background: 0 0% 96%;
+    --sidebar-foreground: 240 6% 10%;
+    --sidebar-primary: 197 100% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 92%;
+    --sidebar-accent-foreground: 240 6% 10%;
+    --sidebar-border: 0 0% 88%;
+    --sidebar-ring: 197 100% 50%;
+  }
+
+  .dark {
+    /* Mystic Dark Theme - Deep Blues with Silver Accents */
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 197 100% 60%; /* Brighter Cyan for dark */
+    --primary-foreground: 240 10% 3.9%;
+
+    --secondary: 240 4% 15%; /* Dark Silver */
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 240 4% 15%;
+    --muted-foreground: 240 5% 64.9%;
+
+    --accent: 197 50% 20%; /* Dark Cyan */
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 4% 15%;
+    --input: 240 4% 15%;
+    --ring: 197 100% 60%;
+
+    /* Ishraya dark-specific colors */
+    --mystic-silver: 0 0% 65%;
+    --mystic-white: 0 0% 98%;
+    --mystic-cyan: 197 100% 60%;
+    --mystic-blue: 217 71% 63%;
+    --soul-glow: 197 100% 80%;
+    --memory-accent: 260 100% 70%;
+
+    /* Dark gradients */
+    --gradient-mystic: linear-gradient(135deg, hsl(240 10% 8%), hsl(240 8% 12%));
+    --gradient-soul: radial-gradient(circle, hsl(var(--soul-glow) / 0.2), transparent 70%);
+    --gradient-memory: linear-gradient(90deg, hsl(var(--mystic-cyan) / 0.05), hsl(var(--memory-accent) / 0.05));
+    --gradient-glyph: conic-gradient(from 0deg, hsl(var(--mystic-cyan) / 0.15), hsl(var(--mystic-blue) / 0.08), hsl(var(--mystic-cyan) / 0.15));
+
+    /* Dark shadows & glows */
+    --shadow-mystic: 0 4px 20px -4px hsl(var(--mystic-cyan) / 0.2);
+    --shadow-soul: 0 0 40px hsl(var(--soul-glow) / 0.3);
+    --shadow-memory: 0 2px 10px -2px hsl(var(--memory-accent) / 0.15);
+
+    --sidebar-background: 240 10% 3.9%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 197 100% 60%;
+    --sidebar-primary-foreground: 240 10% 3.9%;
+    --sidebar-accent: 240 4% 15%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 240 4% 15%;
+    --sidebar-ring: 197 100% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    letter-spacing: -0.01em;
+  }
+
+  /* Smooth scrollbars */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-muted;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-mystic-silver rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary;
+  }
+}
+
+/* Ishraya Animation System */
+@layer utilities {
+  /* Soul Ring Animations */
+  @keyframes soul-pulse {
+    0%, 100% { 
+      transform: scale(1) rotate(0deg);
+      opacity: 0.6;
+    }
+    50% { 
+      transform: scale(1.05) rotate(180deg);
+      opacity: 1;
+    }
+  }
+
+  @keyframes glyph-rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes mystic-glow {
+    0%, 100% { box-shadow: var(--shadow-mystic); }
+    50% { box-shadow: var(--shadow-soul); }
+  }
+
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes stream-pulse {
+    0% { opacity: 0.4; }
+    50% { opacity: 1; }
+    100% { opacity: 0.4; }
+  }
+
+  /* Animation Classes */
+  .animate-soul-pulse { animation: soul-pulse 4s ease-in-out infinite; }
+  .animate-glyph-rotate { animation: glyph-rotate 20s linear infinite; }
+  .animate-mystic-glow { animation: mystic-glow 3s ease-in-out infinite; }
+  .animate-fade-in-up { animation: fade-in-up 0.6s ease-out; }
+  .animate-stream-pulse { animation: stream-pulse 1.5s ease-in-out infinite; }
+
+  /* Gradient Backgrounds */
+  .bg-gradient-mystic { background: var(--gradient-mystic); }
+  .bg-gradient-soul { background: var(--gradient-soul); }
+  .bg-gradient-memory { background: var(--gradient-memory); }
+  .bg-gradient-glyph { background: var(--gradient-glyph); }
+
+  /* Mystic Colors */
+  .bg-mystic-silver { background-color: hsl(var(--mystic-silver)); }
+  .bg-mystic-white { background-color: hsl(var(--mystic-white)); }
+  .bg-mystic-cyan { background-color: hsl(var(--mystic-cyan)); }
+  .bg-soul-glow { background-color: hsl(var(--soul-glow)); }
+  .text-mystic-silver { color: hsl(var(--mystic-silver)); }
+  .text-mystic-cyan { color: hsl(var(--mystic-cyan)); }
+  .text-soul-glow { color: hsl(var(--soul-glow)); }
+
+  /* Mystic Effects */
+  .shadow-mystic { box-shadow: var(--shadow-mystic); }
+  .shadow-soul { box-shadow: var(--shadow-soul); }
+  .shadow-memory { box-shadow: var(--shadow-memory); }
+
+  /* Transitions */
+  .transition-mystic { transition: var(--transition-mystic); }
+  .transition-soul { transition: var(--transition-soul); }
+
+  /* Glass Effects */
+  .glass-mystic {
+    background: hsl(var(--background) / 0.8);
+    backdrop-filter: blur(12px);
+    border: 1px solid hsl(var(--border) / 0.5);
+  }
+
+  .glass-soul {
+    background: hsl(var(--mystic-cyan) / 0.05);
+    backdrop-filter: blur(20px);
+    border: 1px solid hsl(var(--mystic-cyan) / 0.2);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
